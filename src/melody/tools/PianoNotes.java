@@ -1,4 +1,4 @@
-package melody;
+package melody.tools;
 import java.util.ArrayList;
 
 import scales.*;

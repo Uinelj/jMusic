@@ -1,4 +1,4 @@
-package melody;
+package melody.rythmicMelody;
 import java.util.LinkedList;
 
 import templates.Template;

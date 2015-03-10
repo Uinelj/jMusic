@@ -1,6 +1,6 @@
 package gui;
 
-import melody.RythmicMelodyGenerator;
+import melody.rythmicMelody.RythmicMelodyGenerator;
 import modes.Mode;
 import notes.HarmonicNote;
 import players.ChordLoopPlayer;

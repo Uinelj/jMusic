@@ -1,5 +1,7 @@
-package melody;
+package melody.noteGeneration;
 
+import melody.tools.PianoNotes;
+import melody.tools.Repetition;
 import notes.HarmonicNote;
 import scales.Scale;
 
@@ -17,15 +19,19 @@ public class MelodyGenerator {
 		this.melodySize=melodySize;
 	}
 	
-	public void generateMelody() //genï¿½re une mï¿½lodie alï¿½atoire 
+	
+	
+	public Melody generateMelody(Integer index) //on génère un bloc de note qui va potentielement pouvoir se répéter
 	{
-		Integer index=40; //index de la première note dans la gamme
-		for(int i=0;i<melodySize;i++)// : pour 40 notes générées
+		for(int i=0;i<melodySize;i++)// on remplie notre thème
 		{	
 			index=nextNote(index);//on génère la note suivante
 			melody.add(piano.getPiano(nextNote(index)));//on l'ajoute dans la fifo
 		}
+
+		return melody;
 	}
+	
 	
 	private Integer nextNote(Integer position)//donne la position de la prochaine note à générer
 	{
@@ -50,6 +56,7 @@ public class MelodyGenerator {
 		{
 				position=position-nbIncre;	
 		}
+		
 		return position;
 	}
 	

@@ -1,5 +1,7 @@
-package melody;
+package melody.noteGeneration;
 import java.util.LinkedList;
+
+import melody.tools.Repetition;
 import notes.HarmonicNote;
 
 	public class Melody {
@@ -19,6 +21,7 @@ import notes.HarmonicNote;
 		{
 			melody.add(harmonicNote);
 		}
+		
 		
 		public HarmonicNote removeFirst()
 		{
