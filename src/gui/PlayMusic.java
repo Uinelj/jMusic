@@ -1,6 +1,6 @@
 package gui;
 
-import melody.rythmicMelody.RythmicMelodyGenerator;
+import melody.rythmicMelody.RythmedMelody;
 import modes.Mode;
 import notes.HarmonicNote;
 import players.ChordLoopPlayer;
@@ -16,15 +16,15 @@ import chords.ChordLoopGenerator;
 public class PlayMusic {
 	public PlayMusic(int[] options){
 		Rythm rythm = new Rythm(new TimeSignature(4, 4, 100));
-		ThreadedChordPlayer tcp = new ThreadedChordPlayer(new ChordLoopPlayer(1, 12, rythm));
-		ThreadedNotePlayer tnp = new ThreadedNotePlayer(new NotePlayer(2, 12, rythm));
+		ThreadedChordPlayer tcp = new ThreadedChordPlayer(new ChordLoopPlayer(1, 0, rythm));
+		ThreadedNotePlayer tnp = new ThreadedNotePlayer(new NotePlayer(2, 0, rythm));
 		
 		Scale scale = new Scale(new HarmonicNote(options[0]), new Mode(options[1]));
 		
-		RythmicMelodyGenerator rmg = new RythmicMelodyGenerator(scale, 400);
+		RythmedMelody rmg = new RythmedMelody(scale,50,new TimeSignature(4, 4, 100));
 		ChordLoopGenerator clg = new ChordLoopGenerator(scale);
 		
-		rmg.basicMelody();
+		rmg.generateRythmicMelody();
 		ChordLoop cl = new ChordLoop(clg.getPrettyChordSuite(4));
 		
 		tnp.play(rmg.GetRythmicMelody());
