@@ -1,4 +1,4 @@
-//Dernière modification le 26/02/2015
+//Derniï¿½re modification le 26/02/2015
 
 package modes;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * description de type(int) du second constructeur de mode
  * type:
  *  1 --> do (lydien) gamme MAJEUR CLASSIQUE
- *  2 --> ré (phrygien)
+ *  2 --> rï¿½ (phrygien)
  *  3 --> mi (dorien)
  *  4 --> fa (hypolydien)
  *  5 --> sol (hypophrygien)
@@ -17,15 +17,15 @@ import java.util.ArrayList;
  *  8 --> pentatonique majeur (jazzy)
  *  9 --> pentatonique mineur (bluezy)
  *  10 --> gamme blues
- *  11 --> gamme mineure mélodique ascendante
+ *  11 --> gamme mineure mï¿½lodique ascendante
  *  12 --> gamme mineur harmonique
  */
 
-public class Mode { //ici est définit un objet mode, qui est essentiellement une arrayList d'intervals (int)
-					//qui associée à une fondamentale renvoit une arrayList de notes, et au final une belle scale toute propre.
+public class Mode { //ici est dï¿½finit un objet mode, qui est essentiellement une arrayList d'intervals (int)
+					//qui associï¿½e ï¿½ une fondamentale renvoit une arrayList de notes, et au final une belle scale toute propre.
 			
 	private ArrayList<Integer> intervals;
-	
+	private int type;
 	public Mode(ArrayList<Integer> intervals){
 		this.intervals = intervals;
 	}
@@ -34,8 +34,8 @@ public class Mode { //ici est définit un objet mode, qui est essentiellement une
 	public Mode(int type){ //constructeut de mode selon ce que l'on souhaite.
 		
 		ArrayList<Integer> newIntervals =  new ArrayList<Integer>();
-		
-		if(type > 0 && type < 8){//ici sont traités les modes diatonics. les types sont décris en haut de la classe.
+		this.type = type;
+		if(type > 0 && type < 8){//ici sont traitï¿½s les modes diatonics. les types sont dï¿½cris en haut de la classe.
 			
 			int a = 7 - type;
 			int b = (17 - type) % 7;
@@ -51,7 +51,7 @@ public class Mode { //ici est définit un objet mode, qui est essentiellement une
 			setMode(newIntervals);
 		}
 		
-		else if(type == 8 || type == 9){ //attention le "mode" pentatonique ne contient que 6 intervals (en réalité 5 mais who cares?) 
+		else if(type == 8 || type == 9){ //attention le "mode" pentatonique ne contient que 6 intervals (en rï¿½alitï¿½ 5 mais who cares?) 
 			/* remarque || type 8 est le mode majeur de la penta et type 9 est le mode mineur */
 			
 			int a = 3 - (2*(type%8));
@@ -78,7 +78,7 @@ public class Mode { //ici est définit un objet mode, qui est essentiellement une
 			setMode(newIntervals);
 		}
 		
-		else if(type == 11){ //gamme mineure mélodique ascendante
+		else if(type == 11){ //gamme mineure mï¿½lodique ascendante
 			newIntervals.add(2);
 			newIntervals.add(1);
 			newIntervals.add(2);
@@ -103,16 +103,18 @@ public class Mode { //ici est définit un objet mode, qui est essentiellement une
 		}
 		
 		else if(type < 1){
-			System.out.println("ATTENTION || La valeur de l'attribut (int) du constructeur 'Mode' doit être supérieur strictement à 0.");
+			System.out.println("ATTENTION || La valeur de l'attribut (int) du constructeur 'Mode' doit ï¿½tre supï¿½rieur strictement ï¿½ 0.");
 		}
 	}
 
-	public ArrayList<Integer> getIntervals(){ //en quelquesort semblable à un getmode, mais on ne réucp pas l'objet, juste la partie intéressante.
+	public ArrayList<Integer> getIntervals(){ //en quelquesort semblable ï¿½ un getmode, mais on ne rï¿½ucp pas l'objet, juste la partie intï¿½ressante.
 		return intervals;
 	}
 	
 	public void setMode(ArrayList<Integer> intervals){
 		this.intervals = intervals;
 	}
-	
+	public int getType(){
+		return type;
+	}
 }

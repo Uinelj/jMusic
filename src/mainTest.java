@@ -1,69 +1,39 @@
-/*
-import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
-
-import notes.Note;
-import scales.Scale;
-import modes.DiatonicCollection;
 import modes.Mode;
 import notes.HarmonicNote;
-import notes.RythmicNote;
-import templates.TrilleTemplate;
-
+import players.ChordLoopPlayer;
+import players.NotePlayer;
+import players.ThreadedChordPlayer;
+import players.ThreadedNotePlayer;
 import rythm.Rythm;
 import rythm.TimeSignature;
 import scales.Scale;
-import chords.Chord;
 import chords.ChordLoop;
 import chords.ChordLoopGenerator;
 
-import java.util.ArrayList;
-
-import modes.DiatonicCollection;
-import notes.HarmonicNote;
-import notes.RythmicNote;
-
 public class mainTest {
-	public static void main(String[] args){
-		ArrayList<RythmicNote> buffer = new ArrayList<RythmicNote>();
-		DiatonicCollection diatonicModes = new DiatonicCollection();
-		Scale domaj = new Scale(new HarmonicNote(60), diatonicModes.getDiatonicModes().get(2));
-		Player p = new Player(1, 1, new Rythm(new TimeSignature(4, 4, 120)));
-
-		System.out.println(diatonicModes.getDiatonicModes().get(1).getIntervals());
-
-		ArrayList<RythmicNote> doMajRyth = new ArrayList<RythmicNote>();
-		for(HarmonicNote n : domaj.getNotes()){
-			doMajRyth.add(new RythmicNote(n.getHeight(), 4));
-		Rythm rythm = new Rythm(new TimeSignature(4, 4, 120));
-		Player chordPlayer = new Player(1, 1, rythm);
-		Scale doMaj = new Scale(new HarmonicNote(55), new Mode(1));
-		ChordLoopGenerator clg = new ChordLoopGenerator(doMaj);
+	public static void main(String[] args) {
+		Rythm r = new Rythm(new TimeSignature(4, 4, 120));
+		ThreadedChordPlayer tcp = new ThreadedChordPlayer(new ChordLoopPlayer(1, 1, r));
+		ThreadedNotePlayer tnp = new ThreadedNotePlayer(new NotePlayer(1, 1, r));
+		
+		Scale doMaj = new Scale(new HarmonicNote(60), new Mode(1));
+		Scale laMin = doMaj.getRelativeScale();
+		ChordLoopGenerator clg = new ChordLoopGenerator(laMin);
 		ChordLoop cl = new ChordLoop(clg.getPrettyChordSuite(4));
-		while(!cl.getBuffer().isEmpty()){
-			try {
-				Chord curr = cl.removeFirst();
-				chordPlayer.playAlong(curr.toRythmicNote());
-				cl.add(curr);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		System.out.println(laMin);
+		
+		tcp.play(cl.getBuffer());
 		try {
-			p.play(doMajRyth);
+			TimeUnit.SECONDS.sleep(10);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		ArrayList<Note> test = new ArrayList<Note>();
-			
-		RythmicNote note = new RythmicNote(60 , 1);
-		test.add(note);		
-		TrilleTemplate trille = new TrilleTemplate(test);
-		
+		tcp.stop();
+		ChordLoopGenerator clg2 = new ChordLoopGenerator(laMin);
+		ChordLoop cl2 = new ChordLoop(clg2.getPrettyChordSuite(4));
+		tcp.play(cl2.getBuffer());
 	}
 }
-}
-}
-*/
