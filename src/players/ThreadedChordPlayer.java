@@ -17,7 +17,7 @@ public class ThreadedChordPlayer{
 		player.fill(notes);
 		thread.start();
 	}
-	public void stop() throws InterruptedException{
+	public void stop(){
 		thread.interrupt();
 	}
 }
