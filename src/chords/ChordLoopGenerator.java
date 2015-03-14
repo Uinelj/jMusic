@@ -9,7 +9,6 @@ import scales.Scale;
 
 //Meant to generate a cool chord suite. First implementation : the 2-5-1 cadenza.
 public class ChordLoopGenerator {
-	
 	private ChordCollection chordCollection;
 	private ArrayList<List<Integer>> chordFriends;
 	private ArrayList<Chord> chordSuite;
@@ -67,11 +66,13 @@ public class ChordLoopGenerator {
 		makeCadenza(randDegrees);
 		return chordSuite;
 	}
-	
 	public ArrayList<Chord> getPrettyChordSuite(int length){
+		return getPrettyChordSuite(length, 1);
+	}
+	public ArrayList<Chord> getPrettyChordSuite(int length, int startingDegree){
 		int magic; //Where the magic happens.
 		ArrayList<Integer> randDegrees = new ArrayList<Integer>();
-		randDegrees.add(1); //We begin at the first degree.
+		randDegrees.add(startingDegree); //We begin at the first degree.
 		for(int i=1; i<length; i++){
 			//System.out.println("Accord "+ (i+1) +" sur "+ (length));
 			magic=(int)(Math.random()*(getChordFriends(1).size()+1));
@@ -90,6 +91,32 @@ public class ChordLoopGenerator {
 		}
 		System.out.println(randDegrees);
 		makeCadenza(randDegrees);
+		return chordSuite;
+	}
+	public ArrayList<Chord> getModulationChords(Scale foreignScale, int numberOfChords){
+		ArrayList<Chord> baseChords = chordCollection.getHarmonizedChords();
+		ChordCollection foreignChordCollection = new ChordCollection(foreignScale);
+		ArrayList<Chord> foreignChords = foreignChordCollection.getHarmonizedChords();
+		ArrayList<Integer> commonDegrees = new ArrayList<Integer>();
+		ArrayList<Chord> cleanBaseChords = new ArrayList<Chord>();
+		ArrayList<Chord> cleanForeignChords = new ArrayList<Chord>();
+		ArrayList<Chord> chordSuite = new ArrayList<Chord>();
+		for(Chord chord : baseChords){
+			cleanBaseChords.add(chord.getHarmonicChord());
+		}
+		for(Chord chord : foreignChords){
+			cleanForeignChords.add(chord.getHarmonicChord());
+		}
+		//System.out.println(cleanBaseChords);
+		//System.out.println(cleanForeignChords);
+		for(int i=0; i<cleanForeignChords.size(); i++){
+			if(cleanForeignChords.contains(cleanBaseChords.get(i))){
+				commonDegrees.add(i);
+			}
+		}
+		for(int i=0; i<numberOfChords; i++){
+			chordSuite.add(baseChords.get(((int)(Math.random()*commonDegrees.size()))));
+		}
 		return chordSuite;
 	}
 	/*

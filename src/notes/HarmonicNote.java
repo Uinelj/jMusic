@@ -2,6 +2,8 @@
 
 package notes;
 
+import chords.Chord;
+
 public class HarmonicNote extends Note {
 	
 
@@ -13,6 +15,17 @@ public class HarmonicNote extends Note {
 	}
 	public RythmicNote toRythmicNote(){
 		return toRythmicNote(4);
+	}
+	@Override
+	public boolean equals(Object other){
+		if(other == null) return false;
+		if(!(other instanceof HarmonicNote )) return false;
+		HarmonicNote otherNote = (HarmonicNote) other;
+		if(otherNote.getHeight()==this.getHeight()){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	public String toString(){
 		String ret="";
