@@ -56,7 +56,7 @@ public class Mode { //ici est d�finit un objet mode, qui est essentiellement u
 			
 			int a = 3 - (2*(type%8));
 			int b = 4 + ((9-type)%9);
-			for(int i = 0; i < 5; i ++){
+			for(int i = 0; i < 6; i ++){
 				if(i == a || i == b){
 					newIntervals.add(3);
 				}
