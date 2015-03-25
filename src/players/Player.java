@@ -43,11 +43,13 @@ public class Player{
 	protected void play(RythmicNote note) throws InterruptedException {
 		midiChannel.noteOn(note.getHeight(), 100);
 		TimeUnit.MILLISECONDS.sleep((long)rythm.convertTime(note.getLength()));
+		midiChannel.noteOff(note.getHeight());
+
 	}
 	protected void play(Chord chord)throws InterruptedException {
 		long timer = (long)rythm.convertTime(chord.toRythmicNote().get(0).getLength());
 		for(RythmicNote note : chord.toRythmicNote()){
-			midiChannel.noteOn(note.getHeight(), 100);
+			midiChannel.noteOn(note.getHeight(), 60);
 		}
 		TimeUnit.MILLISECONDS.sleep(timer);
 		midiChannel.allNotesOff();

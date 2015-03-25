@@ -11,7 +11,6 @@ public class Rythm
 	public float convertTime(int length)//méthode pour convertir un nombre de temps en seconde
 	{
 		float croche=60000/ts.getTempo();//durée d'une croche en seconde
-		System.out.println("une croche dure : "+croche+"ms");
 		float millisecond = 0;//durée d'un temps
 		switch(length)
 		{

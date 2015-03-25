@@ -1,36 +1,42 @@
 package melody.rythmicMelody;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
 import rythm.TimeSignature;
 import scales.*;
 import templates.TrioletTemplate;
-import melody.noteGeneration.MelodyJazz;
+import melody.noteGeneration.Melody;
+import melody.noteGeneration.MelodyGenerator;
+import melody.noteGeneration.Motif;
 import notes.HarmonicNote;
 import notes.RythmicNote;
 
 public class RythmedMelody {
 	
 	private RythmicMelody rythmicMelody;
-	private MelodyJazz melodyGenerator;
 	private Scale scale;
 	private TimeSignature ts ;
-	
-	public RythmedMelody(Scale scale, int melodySize, TimeSignature ts)
+	private Melody melody;
+	private int melodySize;
+	public RythmedMelody(Melody melody, Scale scale, int melodySize, TimeSignature ts)
 	{
 		rythmicMelody = new RythmicMelody();
 		this.scale = scale;
-		melodyGenerator = new MelodyJazz(scale, melodySize);
+		this.melody=melody;
 		this.ts=ts;
+		this.melodySize=melodySize;
 	}
 	
 	public void generateRythmicMelody()
 	{
 		int time=0;
-		float duration=0;
-		RythmicNote rythmicNote=new RythmicNote(0, 0);
-		melodyGenerator.generateMelody(40);
-		while(!melodyGenerator.getMelody().getMelody().isEmpty())
+		float duration=0;//correspond au nombre de temps écoulé
+		RythmicNote rythmicNote=new RythmicNote(0, 0);//RythmicNote
+	
+		//melody.generateMelody(melodySize);;//on génère une mélodie : la mélodie sera mise en constructeur
+		while(!melody.getMelody().isEmpty())
 		{
+			
 			int type=(int) Math.floor((Math.random()*2) + 1);//choisi un note rythmic ou un template
 			if(type==0)//template
 			{
@@ -38,16 +44,16 @@ public class RythmedMelody {
 				if ( templateType ==0)//triolet
 				{
 					ArrayList<HarmonicNote> templateNotes=new ArrayList<HarmonicNote>();//on créer une ArrayList qui va prendre les notes du template
-					if(melodyGenerator.getMelody().getMelody().size()>=3)//si la mélodie contient bien trois notes :
+					if(melody.getMelody().size()>=3)//si la mélodie contient bien trois notes :
 					{
 						for(int i=0;i<3;i++)
 						{
-							templateNotes.add(melodyGenerator.getFirst());//on remplie la ArrayList des 3 premières notes
-							melodyGenerator.getMelody().removeFirst();//on suppriime les trois première notes de la mélodie
+							templateNotes.add(melody.getFirst());//on remplie la ArrayList des 3 premières notes
+							melody.getMelody().removeFirst();//on suppriime les trois première notes de la mélodie
 						}
 						TrioletTemplate template= new TrioletTemplate(templateNotes);//on créer un template
 						rythmicMelody.addTemplate(template);//on ajoute le template dans la RythmicMelody
-						duration=duration+ts.noteTime(4);//on a 1 temps qui c'est écoulé
+						duration=duration+ts.noteTime(4);//on a 1 noire qui s'est écoulé
 					}
 					else 
 						type=1;
@@ -56,35 +62,49 @@ public class RythmedMelody {
 			
 			if(type==1)//RythmicNote
 			{
-				time=(int) Math.floor((Math.random()*101) + 0);//Note rythmique au pif
-				if((time<101)&&(time>80)&&(duration<=1-ts.noteTime(0)))
+				time=(int)( Math.random()*100);
+
+				int prob[]=new int[10];
+				prob[0]=0;
+				prob[2]=50;//ne pas mettre différent de 0
+				prob[3]=0;
+				prob[4]=50;
+				prob[5]=0;
+				prob[6]=0;
+				prob[7]=0;
+				prob[8]=0;
+				prob[9]=0;
+				int proba=0;
+				for(int i=0;i<10;i++)
 				{
-					rythmicNote=new RythmicNote(melodyGenerator.getMelody().getFirst().getHeight(), 0);//on crï¿½er une nouvelle RythmicNote
-					duration=duration+ts.noteTime(0);//durée en nombre de temps
+					if((time>=proba)&&(time<proba+prob[i])&&(duration<=1-ts.noteTime(i)))
+					{
+						rythmicNote=new RythmicNote(melody.getMelody().getFirst().getHeight(), i);//on crï¿½er une nouvelle RythmicNote
+						duration=duration+ts.noteTime(i);//durée en nombre de temps
+						rythmicMelody.addRythmicNote(rythmicNote);//on la rajoute dans la mï¿½lodie
+						melody.getMelody().removeFirst();
+						System.out.println(i);
+
+					}
+					proba=proba+prob[i];
+
 				}
-				if((time<=80)&&(time>50)&(duration<=1-ts.noteTime(1)))
-				{
-						rythmicNote=new RythmicNote(melodyGenerator.getMelody().getFirst().getHeight(), 1);//on crï¿½er une nouvelle RythmicNote
-						duration=duration+ts.noteTime(1);//durée en nombre de temps
-				}
-				if((time<30)&&(duration<=1-ts.noteTime(3)))
-				{
-						rythmicNote=new RythmicNote(melodyGenerator.getMelody().getFirst().getHeight(), 3);//on crï¿½er une nouvelle RythmicNote
-						duration=duration+ts.noteTime(3);//durée en nombre de temps
-				}
-				if((time>=30)&&(time<=50)&&(duration<=1-ts.noteTime(4)))
-				{
-					rythmicNote=new RythmicNote(melodyGenerator.getMelody().getFirst().getHeight(), 4);//on crï¿½er une nouvelle RythmicNote
-					duration=duration+ts.noteTime(4);//durée en nombre de temps
-				}
-				rythmicMelody.addRythmicNote(rythmicNote);//on la rajoute dans la mï¿½lodie
-				melodyGenerator.getMelody().removeFirst();
-				
 			}
-			
+			if(duration==1)
+			{
+				duration=0;
+			}
 			
 		}
 		
+	}
+	
+	public void setMelody(Melody newMelody)//change la valeur des notes des RythmicNotes de la fifo
+	{
+		for(int i=0;i<newMelody.getMelody().size();i++)
+		{
+			melody.getMelody().get(i).setHeight(newMelody.getMelody().get(i).getHeight());
+		}
 	}
 	
 	public LinkedList<RythmicNote> GetRythmicMelody()

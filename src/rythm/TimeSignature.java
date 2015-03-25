@@ -13,7 +13,7 @@ public class TimeSignature {
 		this.setTempo(tempo);
 	}
 
-	public float noteTime(int note)
+	public float noteTime(int note)// on test la note pour initialiser le nombre de temps qu'elle dure avec comme unité de temps la triplecroche
 	{
 		float time=0;
 		switch(note)
@@ -47,7 +47,7 @@ public class TimeSignature {
 			break;
 		}
 		
-		switch (measureUnit)
+		switch (measureUnit)//on converti ça avec une unité de temps en (measureunit) entrée par l'utilisateur
 		{
 		case 1:
 			time=time/32;
