@@ -15,114 +15,144 @@ public class Motif
 		this.melody=melody;
 		this.scale=scale;
 		piano = new Piano(scale);
-		/*for(int i=0;i<piano.getpiano().size();i++)
-		{
-			System.out.println(piano.getPiano(i));
-		}*/
-		System.out.println(scale.toString());
 	}
 	
 	public Integer gammeRight(Integer currentNote)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
 		
 		for(int i=0;i<8;i++)
 		{
-			index=index+1;
+			count.increment(1);
 			System.out.println(piano.getPiano(index));
 			melody.add(piano.getPiano(index));
 		}
-		return index;
+		
+		return count.getValue();
 	}
 	
 	public Integer gammeLeft(Integer currentNote)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
+
 		for(int i=0;i<7;i++)
 		{
-			index=index-1;
+			count.decrement(1);
 			System.out.println(piano.getPiano(index));
 			melody.add(piano.getPiano(index));
 		}
-		return index;
+		
+		return count.getValue();
 	}
 	
 	public Integer tierceRight(Integer currentNote,int nbrNotes)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
+		
 		for(int i=0;i<nbrNotes;i++)
 		{
-			index=index+2;
+			count.increment(2);
 			System.out.println(piano.getPiano(index));
 			melody.add(piano.getPiano(index));
 		}
-		return index;
+		
+		return count.getValue();
 	}
 	
 	public Integer tierceLeft(Integer currentNote,int nbrNotes)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
+		
 		for(int i=0;i<nbrNotes;i++)
 		{
-			index=index-2;
+			count.decrement(2);
 			System.out.println(piano.getPiano(index));
 			melody.add(piano.getPiano(index));
 		}
-		return index;
+		
+		return count.getValue();
 	}
 	
 	public Integer motif1Right(Integer currentNote)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
+		
 		melody.add(piano.getPiano(index));
-		index=index+4;
+		
+		count.increment(4);
 		melody.add(piano.getPiano(index));
-		index=index-2;
+		
+		count.decrement(2);		
 		melody.add(piano.getPiano(index));
-		index=index+2;
+		
+		count.increment(2);
 		melody.add(piano.getPiano(index));
-		index= index-4;
-		return index;
+		
+		count.decrement(4);
+		
+		return count.getValue();
 	}
 	
 	public Integer motif1Left(Integer currentNote)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
+		
 		melody.add(piano.getPiano(index));
-		index=index-4;
+		
+		count.decrement(4);
 		melody.add(piano.getPiano(index));
-		index=index+2;
+		
+		count.increment(2);
 		melody.add(piano.getPiano(index));
-		index=index-2;
+		
+		count.decrement(2);
 		melody.add(piano.getPiano(index));
-		index= index+4;
-		return index;
+		
+		count.increment(4);
+		
+		return count.getValue();
 	}
 	
 	public Integer motif2Right(Integer currentNote)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
+		
 		melody.add(piano.getPiano(index));
-		index=index+2;
+		
+		count.increment(2);
 		melody.add(piano.getPiano(index));
-		index=index-1;
+		
+		count.decrement(1);
 		melody.add(piano.getPiano(index));
-		index=index-1;
+		
+		count.decrement(1);
 		melody.add(piano.getPiano(index));
-		index= index+4;
+		
+		count.increment(4);
 		melody.add(piano.getPiano(index));
-		index = index -4;
-		return index;
+		
+		count.decrement(4);
+		
+		return count.getValue();
 	}
 	
 	public Integer motifalea(Integer currentNote, int nbrNote)
 	{
 		Integer position = currentNote;
 		Counter count = new Counter(position);
+		
 		for(int i=0;i<nbrNote;i++)
 		{
 			int moreless=(int)( Math.random()*2);
 			int nbIncre=(int)( Math.random()*100);
+			
 			if(nbIncre<=50)
 				nbIncre=1;// ton : 50% de chance d'apparaitre
 			else if((nbIncre>50)&&(nbIncre<80))
@@ -152,6 +182,7 @@ public class Motif
 			{
 				count.increment(nbIncre);
 			}
+			
 			melody.add(piano.getPiano(count.getValue()));
 
 		}
@@ -162,36 +193,43 @@ public class Motif
 	public Integer conGammeRight(Integer currentNote, int nbrNote)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
+		
 		for(int i=0;i<nbrNote;i++)
 		{
-			index=index+1;
-			System.out.println(nbrNote);
+			count.increment(1);
 			melody.add(piano.getPiano(index));
 		}
-		return index;
+		
+		return count.getValue();
 	}
 	
 	public Integer conGammeLeft(Integer currentNote, int nbrNote)
 	{
 		Integer index = new Integer(currentNote);
+		Counter count = new Counter(index);
+		
 		for(int i=0;i<nbrNote;i++)
 		{
-			index=index-1;
-			System.out.println(nbrNote);
+			count.decrement(1);
 			melody.add(piano.getPiano(index));
 		}
-		return index;
+		
+		return count.getValue();
 	}
 	
 	public Integer centred(Integer currentNote, int nbrNote)
 	{
 		Integer position = currentNote;
 		Counter count = new Counter(position);
+		
 		for(int i=0;i<nbrNote;i++)
 		{
 			count.setValue(currentNote);
+			
 			int moreless=(int)( Math.random()*2);
 			int nbIncre=(int)( Math.random()*100);
+			
 			if(nbIncre<=50)
 				nbIncre=1;// ton : 50% de chance d'apparaitre
 			else if((nbIncre>50)&&(nbIncre<80))
@@ -207,6 +245,7 @@ public class Motif
 			{
 				count.increment(nbIncre);
 			}
+			
 			else if((moreless==1)&&(position>=20))//avant la 20e note, on ne peux que incr�menter pour �viter d'avoir des sons trop grave
 			{
 				count.decrement(nbIncre);
@@ -221,6 +260,7 @@ public class Motif
 			{
 				count.increment(nbIncre);
 			}
+			
 			melody.add(piano.getPiano(count.getValue()));
 
 		}
