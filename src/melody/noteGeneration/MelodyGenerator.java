@@ -1,8 +1,11 @@
 package melody.noteGeneration;
 
+import java.util.ArrayList;
+
 import melody.tools.Counter;
 import melody.tools.Piano;
 import melody.tools.PianoNotes;
+import melody.tools.ProbabilityTable;
 import notes.HarmonicNote;
 import scales.Scale;
 
@@ -25,19 +28,13 @@ public class MelodyGenerator {
 	
 	public Melody generateMelody(Integer index) //on génère un bloc de note qui va potentielement pouvoir se répéter
 	{
-		/*for(int i=0;i<melodySize;i++)// on remplie notre thème
-		{	
-			index=rules(index);//on génère la note suivante
-			melody.add(piano.getPiano(rules(index)));//on l'ajoute dans la fifo
-			System.out.println(index);
-		}
-		*/
 		Integer position=index;
 		Motif motif = new Motif(melody, scale);
 		for(int i=0;i<50;i++)
 		{
 			int nbIncre=(int)( Math.random()*5);
-			int moreless=(int)( Math.random()*4);
+			int moreless=(int)( Math.random()*6);
+			
 			if(moreless==0)
 				position=motif.conGammeRight(position,nbIncre);
 			
@@ -50,6 +47,11 @@ public class MelodyGenerator {
 			if(moreless==3)
 				position=motif.centred(position, nbIncre);
 			
+			if(moreless==4)
+				position=motif.tierceLeft(position, nbIncre);
+			
+			if(moreless==5)
+				position=motif.tierceRight(position, nbIncre);
 			
 		}
 		System.out.println(piano.toString());

@@ -35,17 +35,17 @@ public class RythmedMelody {
 		RythmicNote rythmicNote=new RythmicNote(0, 0);//RythmicNote
 		int proba=0;
 
-		prob[0]=0;
-		prob[2]=50;//ne pas mettre différent de 0
-		prob[3]=0;
-		prob[4]=75;
-		prob[5]=0;
-		prob[6]=0;
-		prob[7]=0;
-		prob[8]=0;
-		prob[9]=0;
+		prob[0]=10;
+		prob[1]=10;
+		prob[2]=0;//ne pas mettre différent de 0
+		prob[3]=20;
+		prob[4]=10;
+		prob[5]=10;
+		prob[6]=10;
+		prob[7]=10;
+		prob[8]=10;
+		prob[9]=10;
 		
-		//melody.generateMelody(melodySize);;//on génère une mélodie : la mélodie sera mise en constructeur
 		while(!melody.getMelody().isEmpty())
 		{
 			
@@ -62,7 +62,7 @@ public class RythmedMelody {
 						{
 							templateNotes.add(melody.getFirst());//on remplie la ArrayList des 3 premières notes
 							melody.getMelody().removeFirst();//on suppriime les trois première notes de la mélodie
-						}
+						}           
 						
 						TrioletTemplate template= new TrioletTemplate(templateNotes);//on créer un template
 						rythmicMelody.addTemplate(template);//on ajoute le template dans la RythmicMelody
@@ -92,6 +92,8 @@ public class RythmedMelody {
 					}
 					proba=proba+prob[i];
 				}
+				
+				
 			}
 			
 			if(duration==1)

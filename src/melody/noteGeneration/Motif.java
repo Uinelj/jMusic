@@ -25,8 +25,8 @@ public class Motif
 		for(int i=0;i<8;i++)
 		{
 			count.increment(1);
-			System.out.println(piano.getPiano(index));
-			melody.add(piano.getPiano(index));
+			System.out.println(piano.getPiano(count.getValue()));
+			melody.add(piano.getPiano(count.getValue()));
 		}
 		
 		return count.getValue();
@@ -40,8 +40,8 @@ public class Motif
 		for(int i=0;i<7;i++)
 		{
 			count.decrement(1);
-			System.out.println(piano.getPiano(index));
-			melody.add(piano.getPiano(index));
+			System.out.println(piano.getPiano(count.getValue()));
+			melody.add(piano.getPiano(count.getValue()));
 		}
 		
 		return count.getValue();
@@ -55,8 +55,8 @@ public class Motif
 		for(int i=0;i<nbrNotes;i++)
 		{
 			count.increment(2);
-			System.out.println(piano.getPiano(index));
-			melody.add(piano.getPiano(index));
+			System.out.println(piano.getPiano(count.getValue()));
+			melody.add(piano.getPiano(count.getValue()));
 		}
 		
 		return count.getValue();
@@ -70,8 +70,8 @@ public class Motif
 		for(int i=0;i<nbrNotes;i++)
 		{
 			count.decrement(2);
-			System.out.println(piano.getPiano(index));
-			melody.add(piano.getPiano(index));
+			System.out.println(piano.getPiano(count.getValue()));
+			melody.add(piano.getPiano(count.getValue()));
 		}
 		
 		return count.getValue();
@@ -82,16 +82,16 @@ public class Motif
 		Integer index = new Integer(currentNote);
 		Counter count = new Counter(index);
 		
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.increment(4);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.decrement(2);		
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.increment(2);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.decrement(4);
 		
@@ -103,16 +103,16 @@ public class Motif
 		Integer index = new Integer(currentNote);
 		Counter count = new Counter(index);
 		
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.decrement(4);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.increment(2);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.decrement(2);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.increment(4);
 		
@@ -124,19 +124,19 @@ public class Motif
 		Integer index = new Integer(currentNote);
 		Counter count = new Counter(index);
 		
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.increment(2);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.decrement(1);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.decrement(1);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.increment(4);
-		melody.add(piano.getPiano(index));
+		melody.add(piano.getPiano(count.getValue()));
 		
 		count.decrement(4);
 		
@@ -198,7 +198,7 @@ public class Motif
 		for(int i=0;i<nbrNote;i++)
 		{
 			count.increment(1);
-			melody.add(piano.getPiano(index));
+			melody.add(piano.getPiano(count.getValue()));
 		}
 		
 		return count.getValue();
@@ -212,7 +212,7 @@ public class Motif
 		for(int i=0;i<nbrNote;i++)
 		{
 			count.decrement(1);
-			melody.add(piano.getPiano(index));
+			melody.add(piano.getPiano(count.getValue()));
 		}
 		
 		return count.getValue();
@@ -241,17 +241,17 @@ public class Motif
 			else if((nbIncre>=95)&&(nbIncre<=100))
 				nbIncre=0;//unisson : 5%
 
-			if((moreless==0)&&(position<50))//a partir de la 50e note, on ne peut que dï¿½crï¿½menter
+			if((moreless==0)&&(position<40))//a partir de la 40e note, on ne peut que dï¿½crï¿½menter
 			{
 				count.increment(nbIncre);
 			}
 			
-			else if((moreless==1)&&(position>=20))//avant la 20e note, on ne peux que incrï¿½menter pour ï¿½viter d'avoir des sons trop grave
+			else if((moreless==1)&&(position>=20))//avant la 40e note, on ne peux que incrï¿½menter pour ï¿½viter d'avoir des sons trop grave
 			{
 				count.decrement(nbIncre);
 			}
 			
-			else if((moreless==0)&&(position>=50))//en revanche si on veut incrémenter après 50 on peut pas, il faut alors décrémenter
+			else if((moreless==0)&&(position>=40))//en revanche si on veut incrémenter après 50 on peut pas, il faut alors décrémenter
 			{
 				count.decrement(nbIncre);
 			}
@@ -267,4 +267,6 @@ public class Motif
 		
 		return count.getValue();
 	}
+	
+	
 }
