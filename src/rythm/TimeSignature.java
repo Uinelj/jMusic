@@ -24,7 +24,7 @@ public class TimeSignature {
 		case 1:
 			time=2;
 			break;
-		case 2:
+		case 3:
 			time=4;
 			break;
 		case 4:

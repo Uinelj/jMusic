@@ -8,6 +8,7 @@ import notes.HarmonicNote;
 public class Piano {
 	private ArrayList<PianoNotes> piano;
 	private Scale scale;
+	
 	public Piano(Scale scale)
 	{
 		piano = new ArrayList<PianoNotes>();
@@ -66,6 +67,34 @@ public class Piano {
 		return piano.get(index).getDegre();
 	}
 		
+	public int incrementDegre(int deg, int inc)
+	{
+		int nbrdegre = scale.getNotes().size();
+		deg=deg+inc;
+		
+		while(deg>nbrdegre)
+		{
+			deg=deg-nbrdegre;
+		}
+		
+		return deg;
+		
+	}
+	
+	public int DecrementDegre(int deg, int inc)
+	{
+		int nbrdegre = scale.getNotes().size();
+		deg=deg-inc;
+		
+		while(deg<=0)
+		{
+			deg=deg+nbrdegre;
+		}
+		
+		return deg;
+		
+	}
+	
 	public void setScale(Scale scale)
 	{
 		this.scale=scale;

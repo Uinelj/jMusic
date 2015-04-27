@@ -68,4 +68,9 @@ public class ProbabilityTable {
 	{
 		return (total()==100);
 	}
+	
+	public Integer getProba(int index)
+	{
+		return proba.get(index);
+	}
 }
