@@ -11,7 +11,7 @@ public class NoteGraph {
 
 	public NoteGraph()
 	{
-		g= new Graph(7,15);
+		g= new Graph(8,15);
 		init_table();
 	}
 
@@ -130,7 +130,21 @@ public class NoteGraph {
 		g.addValue(6, 13, 2);
 		g.addValue(6, 14, 2);
 
-			
+		g.addValue(7, 0, 10);
+		g.addValue(7, 1, 7);
+		g.addValue(7, 2, 15);
+		g.addValue(7, 3, 5);
+		g.addValue(7, 4, 11);
+		g.addValue(7, 5, 3);
+		g.addValue(7, 6, 2);
+		g.addValue(7, 7, 2);
+		g.addValue(7, 8, 7);
+		g.addValue(7, 9, 15);
+		g.addValue(7, 10, 5);
+		g.addValue(7, 11, 11);
+		g.addValue(7, 12, 3);
+		g.addValue(7, 13, 2);
+		g.addValue(7, 14, 2);
 				
 		
 	}

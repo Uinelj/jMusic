@@ -15,6 +15,7 @@ public class MelodyGenerator {
 	private Melody melody;
 	private Piano piano;
 	private int melodySize;
+	
 	public MelodyGenerator(Scale scale, int melodySize) 
 	{
 		melody = new Melody();

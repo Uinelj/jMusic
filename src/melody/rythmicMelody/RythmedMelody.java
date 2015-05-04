@@ -37,6 +37,8 @@ public class RythmedMelody {
 		int actu=0;
 		int time=0;
 		int actu1=0;
+		int dc=0;
+		int tc=0;
 		while(!melody.getMelody().isEmpty())
 		{
 			
@@ -54,9 +56,24 @@ public class RythmedMelody {
 						//System.out.println(ts.noteTime(i));
 						//System.out.println(duration);
 						actu1=i;
+						
 					}
 					proba=proba+g.getProba(actu,i);
 					actu=actu1;
+				}
+				
+				if((actu==0)&&(!melody.getMelody().isEmpty()))
+				{
+					for(int note=0;note<4;note++)
+					rythmicNote=new RythmicNote(melody.getMelody().getFirst().getHeight(), 0);//on cr�er une nouvelle RythmicNote
+					rythmicMelody.addRythmicNote(rythmicNote);//on la rajoute dans la m�lodie
+					melody.getMelody().removeFirst();
+				}
+				if((actu==1)&&(!melody.getMelody().isEmpty()))
+				{
+					rythmicNote=new RythmicNote(melody.getMelody().getFirst().getHeight(), 0);//on cr�er une nouvelle RythmicNote
+					rythmicMelody.addRythmicNote(rythmicNote);//on la rajoute dans la m�lodie
+					melody.getMelody().removeFirst();
 				}
 				
 				
