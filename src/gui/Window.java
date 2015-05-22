@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -25,10 +26,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.text.MaskFormatter;
 
 public class Window extends JFrame{
 		
-		private JButton playPause =new JButton(new ImageIcon("images\\playpauseicon.jpg"));
+		private JButton playPause =new JButton(new ImageIcon("images/playpauseicon.jpg"));
 		private JLabel playPauseLabel = new JLabel("Play/Pause"); //TODO quand l'utilisateur cliquera sur play le label deviendra PAUSE et inversement
 		
 		//CASUAL OPTIONS
@@ -77,7 +79,10 @@ public class Window extends JFrame{
 		private JLabel tempoLabel = new JLabel("Tempo _____");
 
 		
+	
 		private JFormattedTextField tempo = new JFormattedTextField(NumberFormat.getIntegerInstance());
+			
+		
 		
 		private JComboBox<String> timeUnit = new JComboBox<String>();
 		
@@ -158,7 +163,7 @@ public class Window extends JFrame{
 			JFrame B = new JFrame("Background");
 			
 			try {
-				background = ImageIO.read(new File("images\\background.jpg"));
+				background = ImageIO.read(new File("images/background.jpg"));
 				// Set your Image Here.
 				B.setContentPane(new JLabel(new ImageIcon(background)));
 			} catch (IOException e) {
@@ -427,9 +432,9 @@ public class Window extends JFrame{
 				playPause.setContentAreaFilled(false); // pas le bouton degeu de base
 				playPause.setBorderPainted(false); // bordures
 				playPause.setFocusPainted(false); 
-				playPause.setIcon(new ImageIcon("images\\playpauseicon.jpg"));
-				playPause.setRolloverIcon(new ImageIcon("images\\playpauseiconclicked.jpg"));
-				playPause.setPressedIcon(new ImageIcon("images\\playpauseicon.jpg"));
+				playPause.setIcon(new ImageIcon("images/playpauseicon.jpg"));
+				playPause.setRolloverIcon(new ImageIcon("images/playpauseiconclicked.jpg"));
+				playPause.setPressedIcon(new ImageIcon("images/playpauseicon.jpg"));
 				
 				playPauseLabel.setFont(new Font("Arial",Font.BOLD, 16));
 				playPauseLabel.setForeground (new Color(255,255,255,255));
@@ -560,42 +565,55 @@ public class Window extends JFrame{
 				
 				case "Piano" :
 					leftHand.setModel(new JComboBox<String>(optionsPiano).getModel());
+					optionsAll[9] = 1;
 					break;
 				case "Chromatic Percussion" :
 					leftHand.setModel(new JComboBox<String>(optionsChromaticPercussion).getModel());
+					optionsAll[9] = 12;
 					break;
 				case "Organ" :
 					leftHand.setModel(new JComboBox<String>(optionsOrgan).getModel());
+					optionsAll[9] = 18;
 					break;
 				case "Guitar" :
 					leftHand.setModel(new JComboBox<String>(optionsGuitar).getModel());
+					optionsAll[9] = 25;
 					break;
 				case "Bass" :
 					leftHand.setModel(new JComboBox<String>(optionsBass).getModel());
+					optionsAll[9] = 33;
 					break;
 				case "Strings" :
 					leftHand.setModel(new JComboBox<String>(optionsString).getModel());
+					optionsAll[9] = 41;
 					break;
 				case "Ensemble" :
 					leftHand.setModel(new JComboBox<String>(optionsEnsemble).getModel());
+					optionsAll[9] = 49;
 					break;
 				case "Brass" :
 					leftHand.setModel(new JComboBox<String>(optionsBrass).getModel());
+					optionsAll[9] = 57;
 					break;
 				case "Reed" :
 					leftHand.setModel(new JComboBox<String>(optionsReed).getModel());
+					optionsAll[9] = 65;
 					break;
 				case "Pipe" :
 					leftHand.setModel(new JComboBox<String>(optionsPipe).getModel());
+					optionsAll[9] = 73;
 					break;
 				case "Synth Lead" :
 					leftHand.setModel(new JComboBox<String>(optionsSynthLead).getModel());
+					optionsAll[9] = 81;
 					break;
 				case "Synth Pad" :
 					leftHand.setModel(new JComboBox<String>(optionsSynthPad).getModel());
+					optionsAll[9] = 89;
 					break;
 				case "Synth Effects" :
 					leftHand.setModel(new JComboBox<String>(optionsSynthEffects).getModel());
+					optionsAll[9] = 97;
 					break;
 				
 				}
@@ -604,42 +622,55 @@ public class Window extends JFrame{
 				
 				case "Piano" :
 					rightHand.setModel(new JComboBox<String>(optionsPiano).getModel());
+					optionsAll[10] = 1;
 					break;
 				case "Chromatic Percussion" :
 					rightHand.setModel(new JComboBox<String>(optionsChromaticPercussion).getModel());
+					optionsAll[10] = 12;
 					break;
 				case "Organ" :
 					rightHand.setModel(new JComboBox<String>(optionsOrgan).getModel());
+					optionsAll[10] = 18;
 					break;
 				case "Guitar" :
 					rightHand.setModel(new JComboBox<String>(optionsGuitar).getModel());
+					optionsAll[10] = 25;
 					break;
 				case "Bass" :
 					rightHand.setModel(new JComboBox<String>(optionsBass).getModel());
+					optionsAll[10] = 33;
 					break;
 				case "Strings" :
 					rightHand.setModel(new JComboBox<String>(optionsString).getModel());
+					optionsAll[10] = 41;
 					break;
 				case "Ensemble" :
 					rightHand.setModel(new JComboBox<String>(optionsEnsemble).getModel());
+					optionsAll[10] = 49;
 					break;
 				case "Brass" :
 					rightHand.setModel(new JComboBox<String>(optionsBrass).getModel());
+					optionsAll[10] = 57;
 					break;
 				case "Reed" :
 					rightHand.setModel(new JComboBox<String>(optionsReed).getModel());
+					optionsAll[10] = 65;
 					break;
 				case "Pipe" :
 					rightHand.setModel(new JComboBox<String>(optionsPipe).getModel());
+					optionsAll[10] = 73;
 					break;
 				case "Synth Lead" :
 					rightHand.setModel(new JComboBox<String>(optionsSynthLead).getModel());
+					optionsAll[10] = 81;
 					break;
 				case "Synth Pad" :
 					rightHand.setModel(new JComboBox<String>(optionsSynthPad).getModel());
+					optionsAll[10] = 89;
 					break;
 				case "Synth Effects" :
 					rightHand.setModel(new JComboBox<String>(optionsSynthEffects).getModel());
+					optionsAll[10] = 97;
 					break;
 				
 				}
@@ -708,7 +739,6 @@ public class Window extends JFrame{
 				
 		class PlayPauseListener implements ActionListener {
 			public void actionPerformed(ActionEvent arg0){
-				//TODO ici il faut démarer le lecteur de musique et dans la fonction d'initialisation, utiliser optionsAdvenced[0] pour définir la note de départ et optionsAdvenced[1] pour définir le mode
 				PlayMusic playMusic = new PlayMusic(optionsAll);
 			}
 		}
