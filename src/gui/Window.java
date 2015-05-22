@@ -28,9 +28,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 
+import sun.awt.image.PixelConverter.Bgrx;
+
 public class Window extends JFrame{
 		
-		private JButton playPause =new JButton(new ImageIcon("images/playpauseicon.jpg"));
+		private JButton playPause =new JButton(new ImageIcon("./images/playpauseicon.jpg"));
 		private JLabel playPauseLabel = new JLabel("Play/Pause"); //TODO quand l'utilisateur cliquera sur play le label deviendra PAUSE et inversement
 		
 		//CASUAL OPTIONS
@@ -163,7 +165,9 @@ public class Window extends JFrame{
 			JFrame B = new JFrame("Background");
 			
 			try {
-				background = ImageIO.read(new File("images/background.jpg"));
+				File bgimg = new File("./images"+File.separator+"background.jpg");
+				System.out.println(bgimg);
+				background = ImageIO.read(bgimg);
 				// Set your Image Here.
 				B.setContentPane(new JLabel(new ImageIcon(background)));
 			} catch (IOException e) {
@@ -172,7 +176,7 @@ public class Window extends JFrame{
 			}
 			
 			
-			// création basique de la fenetre //
+			// crï¿½ation basique de la fenetre //
 			B.setSize(background.getWidth(),background.getHeight());
 			B.setTitle("Jmusic");
 			B.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -183,7 +187,7 @@ public class Window extends JFrame{
 			
 			
 			
-			// création de la barre supérieure
+			// crï¿½ation de la barre supï¿½rieure
 			
 			
 			  JMenuBar menubar = new JMenuBar();
@@ -235,7 +239,7 @@ public class Window extends JFrame{
 
 		        setJMenuBar(menubar);
 		        
-			//création barre supérieure
+			//crï¿½ation barre supï¿½rieure
 		
 			//notre grille de surface est en 1 sur 10
 		
@@ -285,7 +289,7 @@ public class Window extends JFrame{
 				genre = new JComboBox<String>(optionsGenre);
 				
 				String[] optionsChords = {"Chord of 5th ________", "Chord of 7th", "Chord of 9th",
-										"Quinte diminuée", "7th diminuated", "9th diminuated", "RagTime", "Walk bass"};
+										"Quinte diminuï¿½e", "7th diminuated", "9th diminuated", "RagTime", "Walk bass"};
 				chords = new JComboBox<String>(optionsChords);
 				
 				String[] optionsMelody = {"Fast_______________", "Moderate", "Slow",
@@ -326,7 +330,7 @@ public class Window extends JFrame{
 
 				
 				
-			//remplissage de la grille  avec des JPanel (rangés dans un tableau de JPanel à deux dimensions). GridLayout PRINCIPAL
+			//remplissage de la grille  avec des JPanel (rangï¿½s dans un tableau de JPanel ï¿½ deux dimensions). GridLayout PRINCIPAL
 				
 				for(int j = 0; j < 30; j ++){ // ligne
 					for(int i = 0; i <4; i ++) {   //colone
@@ -341,7 +345,7 @@ public class Window extends JFrame{
 				
 			
 			//// placement des divers widgets (bouttons, champx de texte, labels ... ) ////
-				//// ajoutés de haut en bas et de gauche à droite ////
+				//// ajoutï¿½s de haut en bas et de gauche ï¿½ droite ////
 				
 				
 				// POLICES ET FORMES D'ECRITURE
@@ -427,7 +431,7 @@ public class Window extends JFrame{
 
 				
 				
-				//redéfinition de l'icone du bouton playpause
+				//redï¿½finition de l'icone du bouton playpause
 				playPause.setOpaque(false);
 				playPause.setContentAreaFilled(false); // pas le bouton degeu de base
 				playPause.setBorderPainted(false); // bordures
