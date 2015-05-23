@@ -26,11 +26,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 
+import players.ThreadedChordPlayer;
+
 
 public class Window extends JFrame{
 		
 		private JButton playPause = new CustomButton("./images/playpauseicon.jpg","./images/playpauseiconclicked.jpg");
 		private JLabel playPauseLabel = new JLabel("Play/Pause"); //TODO quand l'utilisateur cliquera sur play le label deviendra PAUSE et inversement
+		private int playState = 0;
+		private PlayMusic playMusic = null;
 		
 		//CASUAL OPTIONS
 		private JLabel optionsCasual  = new JLabel("CASUAL OPTIONS");
@@ -474,6 +478,8 @@ public class Window extends JFrame{
 				
 				tempo.setFocusLostBehavior(JFormattedTextField.PERSIST);
 				
+				chordLength.setSelectedItem("sequ. of 4");
+				
 				
 				container[2][6].add(optionsGeneral);
 				container[2][8].add(timeUnit);
@@ -833,7 +839,19 @@ public class Window extends JFrame{
 				
 		class PlayPauseListener implements ActionListener {
 			public void actionPerformed(ActionEvent arg0){
-				PlayMusic playMusic = new PlayMusic(optionsAll);
+				
+				switch(playState){
+				case 0:
+				playMusic = new PlayMusic(optionsAll);
+				playState = 1;
+				break;
+				case 1 :
+				playMusic.stopMusic();
+				playState = 0;
+				break;
+				default :
+				playState = 0;
+				}
 			}
 		}
 		

@@ -2,6 +2,8 @@ package players;
 
 import java.util.LinkedList;
 
+import javax.sound.midi.MidiChannel;
+
 import notes.RythmicNote;
 import rythm.Rythm;
 
@@ -20,5 +22,10 @@ public class ThreadedNotePlayer{
 	
 	public void stop(){
 		thread.interrupt();
+	}
+	
+	public Player getChordPlayer(){
+		
+		return this.player;
 	}
 }

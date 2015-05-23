@@ -2,7 +2,6 @@ package players;
 
 import java.util.LinkedList;
 
-import notes.RythmicNote;
 import chords.Chord;
 
 public class ThreadedChordPlayer{
@@ -19,5 +18,9 @@ public class ThreadedChordPlayer{
 	}
 	public void stop(){
 		thread.interrupt();
+	}
+	public Player getChordPlayer(){
+		
+		return this.player;
 	}
 }

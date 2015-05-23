@@ -16,10 +16,15 @@ import chords.ChordLoop;
 import chords.ChordLoopGenerator;
 
 public class PlayMusic {
+	
+	private ThreadedChordPlayer tcp = null;
+	private ThreadedNotePlayer tnp = null;
+	
 	public PlayMusic(int[] options){
+		
 		Rythm rythm = new Rythm(new TimeSignature(4, 4, options[11]));
-		ThreadedChordPlayer tcp = new ThreadedChordPlayer(new ChordLoopPlayer(1, options[9], rythm));
-		ThreadedNotePlayer tnp = new ThreadedNotePlayer(new NotePlayer(2, options[10], rythm));
+		this.tcp = new ThreadedChordPlayer(new ChordLoopPlayer(1, options[9], rythm));
+		this.tnp = new ThreadedNotePlayer(new NotePlayer(2, options[10], rythm));
 		
 		Scale scale = new Scale(new HarmonicNote(options[0]), new Mode(options[1]));
 		MelodyGenerator melo = new MelodyGenerator(scale, options[8]);
@@ -33,11 +38,16 @@ public class PlayMusic {
 		ChordLoop cl = new ChordLoop(clg.getPrettyChordSuite(options[12]));
 		
 		tnp.play(rmg.GetRythmicMelody());
-		
-		//melo.generateMelody(30);
-		//rmg.setMelody(melo.getMelody());
-		
-		//tnp.play(rmg.GetRythmicMelody());
 		tcp.play(cl.getBuffer());
 	}
+	
+	public void stopMusic(){
+		
+		tcp.stop();
+		tnp.stop();
+		tcp.getChordPlayer().stopPlayer();
+		tnp.getChordPlayer().stopPlayer();
+		
+	}
+	
 }

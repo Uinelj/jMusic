@@ -54,4 +54,9 @@ public class Player{
 		TimeUnit.MILLISECONDS.sleep(timer);
 		midiChannel.allNotesOff();
 	}
+	
+	public void stopPlayer(){
+		
+		this.midiChannel.allNotesOff();
+	}
 }
