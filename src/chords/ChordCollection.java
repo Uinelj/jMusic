@@ -1,6 +1,7 @@
 package chords;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import modes.Mode;
 import notes.HarmonicNote;
@@ -13,18 +14,34 @@ import scales.Scale;
 public class ChordCollection {
 	ArrayList<Chord> harmonizedChords = new ArrayList<Chord>();
 	Scale scale;
-	public ChordCollection(Scale scale){
+	public ChordCollection(Scale scale, ArrayList<Integer> chordStructure){
 		this.scale = scale;
 		Chord chordBuffer;
+		Integer degBuffer;
+		if(chordStructure == null){ //ugly. On peut tester un Builder sinon.
+			chordStructure = getDefaultStructure();
+		}
 		for(int i=1; i<=scale.getNotes().size(); i++){
 			chordBuffer = new Chord();
-			chordBuffer.addNote(scale.getDegree(i));
-			chordBuffer.addNote(scale.getDegree((i+2)));
-			chordBuffer.addNote(scale.getDegree((i+4)));
+			for(int j=0; j<chordStructure.size(); j++){
+				degBuffer = i+chordStructure.get(j)-1;
+				chordBuffer.addNote(scale.getDegree(degBuffer));
+				System.out.println(degBuffer);
+			}
 			harmonizedChords.add(chordBuffer);
 		}
 	}
+	public ChordCollection(Scale scale){
+		this(scale, null);
+	}
 	
+	private ArrayList<Integer >getDefaultStructure(){
+		ArrayList<Integer> chordStructure = new ArrayList<Integer>();
+		chordStructure.add(1);
+		chordStructure.add(3);
+		chordStructure.add(5);
+		return chordStructure;
+	}
 	public ArrayList<Chord> getHarmonizedChords(){
 		return harmonizedChords;
 	}

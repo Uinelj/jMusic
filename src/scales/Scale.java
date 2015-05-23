@@ -33,7 +33,12 @@ public class Scale {
 	}
 
 	public HarmonicNote getDegree(int degree) { // First degree : 1
-		return notes.get((degree - 1) % notes.size());
+			
+		HarmonicNote scaleNote = notes.get((degree - 1) % notes.size());
+		System.out.println("Note de base" + scaleNote.toString());
+		int octaHeight = scaleNote.getHeight()+ 12*((degree-1)/(notes.size()));
+		System.out.println("Note octavisee :" + octaHeight);
+		return new HarmonicNote(octaHeight);
 	}
 
 	public HarmonicNote getFundamental() {
@@ -54,6 +59,9 @@ public class Scale {
 		}else{
 			return this;
 		}
+	}
+	public Mode getMode(){
+		return mode;
 	}
 	public String toString() {
 		String ret = "";

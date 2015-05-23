@@ -569,7 +569,7 @@ public class Window extends JFrame{
 				
 				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); //did it
 				
-				File advencedOptions = new File ("data/advancedOptions.txt");
+				File advencedOptions = new File ("trunk/data/advancedOptions.txt");
 				
 				Scanner scan = null;
 				try {
@@ -717,7 +717,7 @@ public class Window extends JFrame{
 		class leftHandAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				
-				File InstrumentsOptions = new File ("data/instruments.txt");
+				File InstrumentsOptions = new File ("trunk/data/instruments.txt");
 				
 				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 
 				
@@ -747,7 +747,7 @@ public class Window extends JFrame{
 		class rightHandAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 		
-				File InstrumentsOptions = new File ("data/instruments.txt");
+				File InstrumentsOptions = new File ("trunk/data/instruments.txt");
 
 			
 				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 

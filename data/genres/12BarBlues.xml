@@ -40,10 +40,16 @@
 	<architecture>
 		<form></form>
 		<progression>1111441155441155</progression>
-		<chord_structure>1356</chord_structure>
+		<chord_structure>135</chord_structure>
 		<chord_style>Sim</chord_style>
 	</architecture>
 	<modes>
-		<mode>10</mode>
+		<melody>
+			<mode>10</mode>
+		</melody>
+		<chords>
+			<mode>1</mode>
+		</chords>
+		
 	</modes>
 </genre>

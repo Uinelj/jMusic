@@ -1,5 +1,6 @@
 package chords;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import notes.HarmonicNote;
 import notes.RythmicNote;
@@ -43,7 +44,16 @@ public class Chord {
 		}
 		return ret;
 	}
-	
+	public LinkedList<RythmicNote> arpeggiate(){
+		return arpeggiate(4);
+	}
+	public LinkedList<RythmicNote> arpeggiate(int defaultNoteDuration){
+		LinkedList<RythmicNote> arp = new LinkedList<RythmicNote>();
+		for(int i=0; i<notes.size(); i++){
+			arp.add(new RythmicNote(notes.get(i).getHeight(), defaultNoteDuration));
+		}
+		return arp;
+	}
 	public String toString(){
 		return notes.toString();
 	}

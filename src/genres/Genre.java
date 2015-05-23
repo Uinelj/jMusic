@@ -22,7 +22,8 @@ public class Genre {
 		ArrayList<Integer> chordStructure = new ArrayList<Integer>();
 		ArrayList<Integer> progression = new ArrayList<Integer>();
 		String chordStyle;
-		int mode;
+		int melodyMode;
+		int chordsMode;
 		
 	public Genre(String name) throws XPathExpressionException{ //Complexity : O(scary)
 		XPathFactory xpf = XPathFactory.newInstance();
@@ -48,7 +49,9 @@ public class Genre {
       //chordInstruments
         XPathExpression chordInstrumentsExpression = xPath.compile("genre//instruments//chords//instrument");
        //mode
-        XPathExpression modeExpression = xPath.compile("genre//mode");
+        XPathExpression melodyModeExpression = xPath.compile("genre//modes//melody//mode");
+        XPathExpression chordsModeExpression = xPath.compile("genre//modes//chords//mode");
+        
         
         prettyName = (String) nameExpression.evaluate(is, XPathConstants.STRING);
         
@@ -84,8 +87,10 @@ public class Genre {
 			chordInstruments.add(Integer.parseInt(instrumentsNode.item(i).getTextContent()));
         }
         
-        Double modeDouble = (Double) modeExpression.evaluate(is, XPathConstants.NUMBER);
-        mode = modeDouble.intValue();
+        String melodyModeString = (String) melodyModeExpression.evaluate(is, XPathConstants.STRING);
+        melodyMode = Integer.parseInt(melodyModeString);
+        String chordsModeString = (String) chordsModeExpression.evaluate(is, XPathConstants.STRING);
+        chordsMode = Integer.parseInt(chordsModeString);
 	}
         
 	public String getName(){
@@ -123,8 +128,27 @@ public class Genre {
 	public String getChordStyle(){
 		return chordStyle;
 	}
-	public Integer getMode(){
-		return mode;
+	public Integer getMelodyMode(){
+		return melodyMode;
+	}
+	public Integer getChordsMode(){
+		return chordsMode;
+	}
+	public String toString(){
+		String ret ="";
+		ret = "Name : " + prettyName + "\n"
+		+ "minTempo : " + minTempo + "\n"
+		+ "maxTempo : " + maxTempo + "\n"
+		+ "Melody Instruments : " + melodyInstruments.toString() + "\n"
+		+"Chord Instruments : " + chordInstruments.toString() + "\n"
+		+ "Form : " + form + "\n"
+		+ "Progression" + progression.toString() + "\n"
+		+ "Chord Structure : " + chordStructure + "\n"
+		+ "Chord Style : " + chordStyle + "\n"
+		+ "Melody Mode : " + melodyMode + "\n"
+		+"Chords Mode : " + chordsMode;
+		
+		return ret;
 	}
 	
 }
