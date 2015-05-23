@@ -10,8 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -28,11 +26,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 
-import sun.awt.image.PixelConverter.Bgrx;
 
 public class Window extends JFrame{
 		
-		private JButton playPause =new JButton(new ImageIcon("./images/playpauseicon.jpg"));
+		private JButton playPause = new CustomButton("./images/playpauseicon.jpg","./images/playpauseiconclicked.jpg");
 		private JLabel playPauseLabel = new JLabel("Play/Pause"); //TODO quand l'utilisateur cliquera sur play le label deviendra PAUSE et inversement
 		
 		//CASUAL OPTIONS
@@ -78,17 +75,21 @@ public class Window extends JFrame{
 		private JLabel optionsGeneral  = new JLabel("GENERAL OPTIONS");
 		private JLabel timeUnitLabel = new JLabel("Time Unit ______");
 		private JLabel melodyLengthLabel = new JLabel("Melody Length _");
-		private JLabel tempoLabel = new JLabel("Tempo _____");
-
+		private JLabel tempoLabel = new JLabel("Tempo ________");
+		private JLabel chordLengthLabel = new JLabel("Chord Length __");
 		
-	
-		private JFormattedTextField tempo = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		private JButton tempoValidate = new CustomButton("./images/tempoValidate.jpg","./images/tempoValidateclicked.jpg");
 			
-		
-		
 		private JComboBox<String> timeUnit = new JComboBox<String>();
 		
 		private JComboBox<String> melodyLength = new JComboBox<String>();
+		
+		private JComboBox<String> chordLength = new JComboBox<String>();
+		
+		private JFormattedTextField tempo = new JFormattedTextField(new createMask("###"));
+		
+		
+		
 		
 		//GENERAL OPTIONS
 		
@@ -156,18 +157,33 @@ public class Window extends JFrame{
 		private GridLayout grid = new GridLayout(4,30,0,0);
 		
 		
-		private int optionsAll[] = {60, 1,1,1,1,1,1,1,50,1,1,1};
+		private int optionsAll[] = {60, //case 0 -> note fondamentale
+									1, // -> mode
+									1, // -> gender
+									1, // -> chords setting
+									1, // -> melody speed
+									1, // case 5 -> casu scale
+									1, //-> special
+									1, // -> time unit
+									50, // -> melody size
+									1, // -> left hand instru
+									1, // case 10 -> right hand instru
+									90, // -> tempo
+									4 // -> number of chords in the loop
+									};
 		
 		private BufferedImage background;		
 	
-		public Window(){
+		
+		
+		
+		public Window() {
 			
 			JFrame B = new JFrame("Background");
 			
 			try {
-				File bgimg = new File("./images"+File.separator+"background.jpg");
-				System.out.println(bgimg);
-				background = ImageIO.read(bgimg);
+				background = ImageIO.read(new File("images"+File.separator+"background.jpg"));
+
 				// Set your Image Here.
 				B.setContentPane(new JLabel(new ImageIcon(background)));
 			} catch (IOException e) {
@@ -308,6 +324,15 @@ public class Window extends JFrame{
 												"200", "300", "500", "1000","infinite"};
 				melodyLength = new JComboBox<String>(optionsMelodyLength);
 				
+				String[] optionschordLength = {"uniq. chord__________","sequ. of 2","sequ. of 3","sequ. of 4","sequ. of 5","sequ. of 6","sequ. of 8","sequ. of 10"};
+				chordLength = new JComboBox<String>(optionschordLength);
+				
+				
+				tempo.setPreferredSize(new Dimension(90,30));
+				tempo.setText("100");
+				
+				
+				
 				
 				//GENERAL OPTIONS
 				
@@ -322,9 +347,7 @@ public class Window extends JFrame{
 
 				leftHand = new JComboBox<String>(optionsPiano);
 				
-				tempo.setPreferredSize(new Dimension(135,30));
 
-				
 				
 				//INSTRUMENTS OPTIONS
 
@@ -381,6 +404,8 @@ public class Window extends JFrame{
 				melodyLengthLabel.setForeground (new Color(255,255,255,255));
 				tempoLabel.setFont(policeTexte1);
 				tempoLabel.setForeground (new Color(255,255,255,255));
+				chordLengthLabel.setFont(policeTexte1);
+				chordLengthLabel.setForeground (new Color(255,255,255,255));
 				//instruments options
 				labelLeft.setFont(policeTexte1);
 				labelLeft.setForeground (new Color(255,255,255,255));
@@ -391,6 +416,7 @@ public class Window extends JFrame{
 				
 				
 				container[0][0].add(menubar);
+				
 				
 				//CASUAL OPTIONS
 				
@@ -431,15 +457,6 @@ public class Window extends JFrame{
 
 				
 				
-				//red�finition de l'icone du bouton playpause
-				playPause.setOpaque(false);
-				playPause.setContentAreaFilled(false); // pas le bouton degeu de base
-				playPause.setBorderPainted(false); // bordures
-				playPause.setFocusPainted(false); 
-				playPause.setIcon(new ImageIcon("images/playpauseicon.jpg"));
-				playPause.setRolloverIcon(new ImageIcon("images/playpauseiconclicked.jpg"));
-				playPause.setPressedIcon(new ImageIcon("images/playpauseicon.jpg"));
-				
 				playPauseLabel.setFont(new Font("Arial",Font.BOLD, 16));
 				playPauseLabel.setForeground (new Color(255,255,255,255));
 				
@@ -455,13 +472,19 @@ public class Window extends JFrame{
 				optionsGeneral.setBorder(BorderFactory.createLineBorder( new Color(255,255,255,255), 5, true));
 				optionsGeneral.setForeground (new Color(247,255,60,250));
 				
+				tempo.setFocusLostBehavior(JFormattedTextField.PERSIST);
+				
+				
 				container[2][6].add(optionsGeneral);
 				container[2][8].add(timeUnit);
 				container[2][8].add(timeUnitLabel);
 				container[2][9].add(melodyLength);
 				container[2][9].add(melodyLengthLabel);
 				container[2][10].add(tempo);
+				container[2][10].add(tempoValidate);
 				container[2][10].add(tempoLabel);
+				container[2][11].add(chordLength);
+				container[2][11].add(chordLengthLabel);
 				
 				//GENERAL OPTIONS
 				
@@ -514,7 +537,10 @@ public class Window extends JFrame{
 
 				timeUnit.addActionListener(new ItemAction());
 				melodyLength.addActionListener(new ItemAction());
-				
+				chordLength.addActionListener(new ItemAction());
+				tempoValidate.addActionListener(new tempoAction());
+
+
 				//GENERAL OPTIONS
 				
 				//INSTRUMENTS OPTIONS
@@ -740,13 +766,76 @@ public class Window extends JFrame{
 				}
 			}
 		}
+		
+		
+		class tempoAction implements ActionListener {
+			public void actionPerformed(ActionEvent e){
+				int i = 0;
+				String fieldString = "";
+				String main = tempo.getText();
+				if(Character.toString(main.charAt(0)).equals("0")){
+					
+					
+					fieldString = "0"+Character.toString(main.charAt(1)) + Character.toString(main.charAt(2));
+					
+					
+					if(Character.toString(main.charAt(1)).equals("0")){
+						
+						i = Integer.parseInt(Character.toString(main.charAt(2)));
+						fieldString = "00"+Character.toString(main.charAt(2));
+					}
+					else if(Character.toString(main.charAt(2)).equals(" ")){
+					i = Integer.parseInt(main.substring(1,2));
+					}
+					else{
+					i = Integer.parseInt(main.substring(1));
+					}
+					tempo.setText(fieldString);	
+				}
+				
+			
+				if(Character.toString(main.charAt(2)).equals(" ")){
+					
+					
+					fieldString = "0" + main;
+				
+					if(Character.toString(main.charAt(1)).equals(" ")){
+						
+						if(Character.toString(main.charAt(0)).equals(" ")){
+							fieldString = "001";
+							i = 1;
+						}
+						else{
+						i = Integer.parseInt(main.substring(0,1));
+						}
+						fieldString = "00" + main;
+					}
+					else{
+					i = Integer.parseInt(main.substring(0,2));
+					}
+					tempo.setText(fieldString);	
+
+				}
+				
+				if(!(Character.toString(main.charAt(2)).equals(" "))){
+					
+					i = Integer.parseInt(tempo.getText());
+					
+				}
+				
+				
+				optionsAll[11] = i;
+				System.out.println(optionsAll[11]);
+					
+			}
+		}
+		
 				
 		class PlayPauseListener implements ActionListener {
 			public void actionPerformed(ActionEvent arg0){
 				PlayMusic playMusic = new PlayMusic(optionsAll);
 			}
 		}
-		
 		
 			
 }
