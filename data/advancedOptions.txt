@@ -111,3 +111,14 @@ melody lenght
 500;8;500;
 1000;8;1000;
 infinite;8;10000;
+
+chord length
+
+uniq. chord__________;12;1;
+sequ. of 2;12;2;
+sequ. of 3;12;3;
+sequ. of 4;12;4;
+sequ. of 5;12;5;
+sequ. of 6;12;6;
+sequ. of 8;12;8;
+sequ. of 10;12;10;

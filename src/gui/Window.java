@@ -23,10 +23,10 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.text.MaskFormatter;
-
-import players.ThreadedChordPlayer;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 
 public class Window extends JFrame{
@@ -35,6 +35,7 @@ public class Window extends JFrame{
 		private JLabel playPauseLabel = new JLabel("Play/Pause"); //TODO quand l'utilisateur cliquera sur play le label deviendra PAUSE et inversement
 		private int playState = 0;
 		private PlayMusic playMusic = null;
+		private JOptionPane messages = new JOptionPane();
 		
 		//CASUAL OPTIONS
 		private JLabel optionsCasual  = new JLabel("CASUAL OPTIONS");
@@ -197,6 +198,7 @@ public class Window extends JFrame{
 			
 			
 			// crï¿½ation basique de la fenetre //
+		
 			B.setSize(background.getWidth(),background.getHeight());
 			B.setTitle("Jmusic");
 			B.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -230,25 +232,74 @@ public class Window extends JFrame{
 		              
 		            }
 		        });
-		        JMenu help = new JMenu("Help");
+		        JButton help = new JButton("Help");
 		        help.setToolTipText("get some help about options");
-		        help.addActionListener(new ActionListener() {
+		        help.addActionListener(new ActionListener(){
 		            
-		            public void actionPerformed(ActionEvent event) {
-		                
+		            public void actionPerformed(ActionEvent event) { //fenetre de dialogue qui affiches des astuces et des aides en récuprant les string dans le txt data helpTexts.
+		            	
+		            	String options[] = {"Quit","Next"};
+		            	int tips = 1;
+		            	int page = 0;
+		            	int pageMax = pageMax();
+		            	
+		            	while(tips != 0){
+		            	File HelpText = new File ("data/helpTexts.txt");		    													
+						Scanner scan = null;
+						try {
+							scan = new Scanner(HelpText);
+							scan.useDelimiter(";|\n");
+							while(scan.hasNext()) {
+								if(scan.next().equals(Integer.toString(page))){
+									
+									String message = scan.next();
+									message = message.replace("*","\n");
+									
+									JTextArea textArea = new JTextArea(10,50);
+									textArea.setText(message);
+									textArea.setEditable(false);
+									JScrollPane scrollPane = new JScrollPane(textArea);
+		        
+									System.out.println(page);
+									if(page == pageMax){
+										
+										JOptionPane.showMessageDialog(null,scrollPane, "Help",JOptionPane.CANCEL_OPTION);
+										tips = 0;
+									}
+									else if(page < pageMax){
+						            	int result = JOptionPane.showOptionDialog(null, scrollPane, "Help",JOptionPane.CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						            	if(options[result].equals("Next")){
+						            			
+						            		tips = 1;
+						            		page ++;
+						            	
+						            	}
+						            	else tips = 0;
+									}
+					            	
+					            }
+							}
+						} catch (FileNotFoundException e1) {
+							e1.printStackTrace();
+						}
+						finally {
+							if (scan!=null) scan.close();
+						}
+		            	}
+		        
 		            }
 		        });
 
-		        JMenuItem eMenuItem = new JMenuItem("Exit");
-		        eMenuItem.setToolTipText("Exit application");
-		        eMenuItem.addActionListener(new ActionListener() {
+		        JMenuItem exit = new JMenuItem("Exit");
+		        exit.setToolTipText("Exit application");
+		        exit.addActionListener(new ActionListener() {
 		            
 		            public void actionPerformed(ActionEvent event) {
 		                System.exit(0);
 		            }
 		        });
 
-		        file.add(eMenuItem);
+		        file.add(exit);
 		        
 		        menubar.add(file);
 		        menubar.add(save);
@@ -748,7 +799,6 @@ public class Window extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 		
 				File InstrumentsOptions = new File ("trunk/data/instruments.txt");
-
 			
 				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 
 								
@@ -839,7 +889,6 @@ public class Window extends JFrame{
 				
 		class PlayPauseListener implements ActionListener {
 			public void actionPerformed(ActionEvent arg0){
-				
 				switch(playState){
 				case 0:
 				playMusic = new PlayMusic(optionsAll);
@@ -853,6 +902,35 @@ public class Window extends JFrame{
 				playState = 0;
 				}
 			}
+		}
+		
+		public int pageMax(){
+			
+			int pageMax = 0;
+			
+			File helpTextsOptions = new File ("data/helpTexts.txt");			
+							
+			Scanner scan = null;
+			
+			try {
+				scan = new Scanner(helpTextsOptions);
+				scan.useDelimiter(";|\n");
+				while(scan.hasNext()) {
+					if(scan.next().equals(Integer.toString(pageMax))){
+					pageMax ++;
+					}
+				}
+				pageMax --;
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			finally {
+				if (scan!=null) scan.close();
+			}
+			
+			System.out.println(pageMax);
+			
+			return pageMax;
 		}
 		
 			

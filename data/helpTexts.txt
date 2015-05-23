@@ -1,0 +1,8 @@
+textes d'aide;
+
+0;Jmusic est un générateur procédural de musique.* Il permet à l'utilisateur,avec ou sans connaissances, de paramétrer de multiple façon la musique.* Les options sont plus ou moins complexes et le résultat dépend uniquement de celles-ci.* Cliquez sur suivant pour plus de détails.;
+1;Casual Options:* Les options dîtes casual sont à destination des utilisateur novices ou qui n'ont jamais* pratiqué de musique. Les options présentes modifies plusieurs paramètres interne à la volée.* Par exemple, si l'utilisateur choisit l'option musique "sad" alors, le mode, la note fondamentale, le tempo,* l'unité de temps et d'autres options, vont être automatiquement changées.* Les options casual sont donc à bannir pour une utilisation avancée.;
+2;j'aime la choucroute;
+3;lolilol;
+4;yayyyya;
+5;fin;
