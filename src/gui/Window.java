@@ -238,7 +238,11 @@ public class Window extends JFrame{
 		            
 		            public void actionPerformed(ActionEvent event) { //fenetre de dialogue qui affiches des astuces et des aides en récuprant les string dans le txt data helpTexts.
 		            	
-		            	String options[] = {"Quit","Next"};
+		            	String options1[] = {"Quit","Next"};
+		            	String options2[] = {"Quit","Previous","Next"};
+		            	String options3[] = {"Previous","Exit"};
+
+
 		            	int tips = 1;
 		            	int page = 0;
 		            	int pageMax = pageMax();
@@ -261,17 +265,40 @@ public class Window extends JFrame{
 									JScrollPane scrollPane = new JScrollPane(textArea);
 		        
 									System.out.println(page);
-									if(page == pageMax){
-										
-										JOptionPane.showMessageDialog(null,scrollPane, "Help",JOptionPane.CANCEL_OPTION);
-										tips = 0;
-									}
-									else if(page < pageMax){
-						            	int result = JOptionPane.showOptionDialog(null, scrollPane, "Help",JOptionPane.CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-						            	if(options[result].equals("Next")){
+									
+									if(page == 0){
+						            	int result = JOptionPane.showOptionDialog(null, scrollPane, "Help",JOptionPane.CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options1, options1[1]);
+						            	if(options1[result].equals("Next")){
 						            			
 						            		tips = 1;
 						            		page ++;
+						            	
+						            	}
+						            	else tips = 0;
+									}
+									else if(page < pageMax){
+						            	int result = JOptionPane.showOptionDialog(null, scrollPane, "Help",JOptionPane.CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[1]);
+						            	if(options2[result].equals("Next")){
+						            			
+						            		tips = 1;
+						            		page ++;
+						            	
+						            	}
+						            	else if(options2[result].equals("Previous")){
+					            			
+						            		tips = 1;
+						            		page --;
+						            	
+						            	}
+						            	else tips = 0;
+									}
+									else if(page == pageMax){
+										
+										int result = JOptionPane.showOptionDialog(null, scrollPane, "Help",JOptionPane.CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options3, options3[1]);
+						            	if(options3[result].equals("Previous")){
+						            			
+						            		tips = 1;
+						            		page --;
 						            	
 						            	}
 						            	else tips = 0;
