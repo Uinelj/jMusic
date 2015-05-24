@@ -3,6 +3,7 @@ package gui;
 
 import melody.noteGeneration.MelodyGenerator;
 import melody.rythmicMelody.RythmedMelody;
+import melody.rythmicMelody.RythmicMelody;
 import modes.Mode;
 import notes.HarmonicNote;
 import players.ChordLoopPlayer;
@@ -19,9 +20,11 @@ public class PlayMusic {
 	
 	private ThreadedChordPlayer tcp = null;
 	private ThreadedNotePlayer tnp = null;
+	private RythmedMelody rmg = null;
 	
 	public PlayMusic(int[] options){
 		
+		System.out.println(options[8]);
 		Rythm rythm = new Rythm(new TimeSignature(4, 4, options[11]));
 		this.tcp = new ThreadedChordPlayer(new ChordLoopPlayer(1, options[9], rythm));
 		this.tnp = new ThreadedNotePlayer(new NotePlayer(2, options[10], rythm));
@@ -29,7 +32,7 @@ public class PlayMusic {
 		Scale scale = new Scale(new HarmonicNote(options[0]), new Mode(options[1]));
 		MelodyGenerator melo = new MelodyGenerator(scale, options[8]);
 		melo.generateMelody(30);
-		RythmedMelody rmg = new RythmedMelody(melo.getMelody(),scale,options[8],new TimeSignature(4, 4, options[11]));
+		this.rmg = new RythmedMelody(melo.getMelody(),scale,options[8],new TimeSignature(4, 4, options[11]));
 		
 		
 		ChordLoopGenerator clg = new ChordLoopGenerator(scale);
@@ -48,6 +51,11 @@ public class PlayMusic {
 		tcp.getChordPlayer().stopPlayer();
 		tnp.getChordPlayer().stopPlayer();
 		
+	}
+	
+	public RythmicMelody getCurrentMelody(){
+		
+		return rmg.GetRythmicMelodyObject();
 	}
 	
 }

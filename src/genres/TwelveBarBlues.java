@@ -1,4 +1,4 @@
-package genres;
+/*package genres;
 
 import java.util.LinkedList;
 
@@ -12,3 +12,4 @@ public class TwelveBarBlues extends Genre{
 	}
 
 }
+*/

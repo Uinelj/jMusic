@@ -93,4 +93,9 @@ public class RythmedMelody {
 	{
 		return rythmicMelody.getRythmicMelody();
 	}
+	
+	public RythmicMelody GetRythmicMelodyObject(){
+	
+		return rythmicMelody;
+	}
 }

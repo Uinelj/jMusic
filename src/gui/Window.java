@@ -28,6 +28,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import save.Save;
+
 
 public class Window extends JFrame{
 		
@@ -216,15 +218,30 @@ public class Window extends JFrame{
 		      
 		      
 		        JMenu file = new JMenu("File");
-		        JMenu save = new JMenu("Save");
-		        save.setToolTipText("save last music or current one");
+		        
+		        JButton save = new JButton("Save");
+		        save.setToolTipText("save current music");
 		        save.addActionListener(new ActionListener() {
 		            
 		            public void actionPerformed(ActionEvent event) {
-		                
+		                if(playState != 0){ //si la musique tourne
+		                	String fileName = JOptionPane.showInputDialog(null, "Veuiller indiquer le nom du fichier à générer: ", "Save de la melodie", JOptionPane.QUESTION_MESSAGE);
+		                	String path = "data/save/"+ fileName+".ser";
+		                	System.out.println("coucou1");
+		                	Save newSave = new Save(path, playMusic.getCurrentMelody());
+		                	System.out.println("coucou1");
+
+		                	newSave.save(path, playMusic.getCurrentMelody());
+		                	System.out.println("coucou1");
+
+		                	
+		                }
+		                else{
+		                	JOptionPane.showMessageDialog(null, "Vous devez générer une melodie pour l'enregistrer", "ATTENTION! Save impossible", JOptionPane.WARNING_MESSAGE);
+		                }
 		            }
 		        });
-		        JMenu load = new JMenu("Load");
+		        JButton load = new JButton("Load");
 		        load.setToolTipText("import a previous music");
 		        load.addActionListener(new ActionListener() {
 		            
@@ -250,6 +267,7 @@ public class Window extends JFrame{
 		            	while(tips != 0){
 		            	File HelpText = new File ("data/helpTexts.txt");		    													
 						Scanner scan = null;
+						
 						try {
 							scan = new Scanner(HelpText);
 							scan.useDelimiter(";|\n");
@@ -263,9 +281,8 @@ public class Window extends JFrame{
 									textArea.setText(message);
 									textArea.setEditable(false);
 									JScrollPane scrollPane = new JScrollPane(textArea);
-		        
-									System.out.println(page);
-									
+									textArea.setCaretPosition(0);//ligne pour mettre le scroll en haut
+		        									
 									if(page == 0){
 						            	int result = JOptionPane.showOptionDialog(null, scrollPane, "Help",JOptionPane.CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options1, options1[1]);
 						            	if(options1[result].equals("Next")){
@@ -629,9 +646,9 @@ public class Window extends JFrame{
 				
 				//INSTRUMENTS OPTIONS
 				
-				leftHandCategory.addActionListener(new CategoryAction());
+				leftHandCategory.addActionListener(new LeftHandCategoryAction());
 				leftHand.addActionListener(new leftHandAction());
-				rightHandCategory.addActionListener(new CategoryAction());
+				rightHandCategory.addActionListener(new RightHandCategoryAction());
 				rightHand.addActionListener(new rightHandAction());
 				
 				//GENERAL OPTIONS
@@ -647,7 +664,7 @@ public class Window extends JFrame{
 				
 				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); //did it
 				
-				File advencedOptions = new File ("trunk/data/advancedOptions.txt");
+				File advencedOptions = new File ("data/advancedOptions.txt");
 				
 				Scanner scan = null;
 				try {
@@ -672,10 +689,11 @@ public class Window extends JFrame{
 			}
 		}
 		
-		class CategoryAction implements ActionListener {
+		class LeftHandCategoryAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				
-				switch(leftHandCategory.getSelectedItem().toString()){ 
+				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 
+
+				switch(source){ 
 				
 				case "Piano" :
 					leftHand.setModel(new JComboBox<String>(optionsPiano).getModel());
@@ -731,7 +749,12 @@ public class Window extends JFrame{
 					break;
 				
 				}
-				
+			}
+		}
+				class RightHandCategoryAction implements ActionListener {
+					public void actionPerformed(ActionEvent e) {
+						String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 
+
 				switch(rightHandCategory.getSelectedItem().toString()){ 
 				
 				case "Piano" :
@@ -787,15 +810,14 @@ public class Window extends JFrame{
 					optionsAll[10] = 97;
 					break;
 				
+					}			
 				}
 			}
-		}
-		
 
 		class leftHandAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				
-				File InstrumentsOptions = new File ("trunk/data/instruments.txt");
+				File InstrumentsOptions = new File ("data/instruments.txt");
 				
 				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 
 				
@@ -825,7 +847,7 @@ public class Window extends JFrame{
 		class rightHandAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 		
-				File InstrumentsOptions = new File ("trunk/data/instruments.txt");
+				File InstrumentsOptions = new File ("data/instruments.txt");
 			
 				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 
 								
@@ -866,6 +888,12 @@ public class Window extends JFrame{
 						
 						i = Integer.parseInt(Character.toString(main.charAt(2)));
 						fieldString = "00"+Character.toString(main.charAt(2));
+						
+						if(Character.toString(main.charAt(2)).equals("0")){
+							
+							i = 30;
+							fieldString = "030";
+						}
 					}
 					else if(Character.toString(main.charAt(2)).equals(" ")){
 					i = Integer.parseInt(main.substring(1,2));
@@ -885,8 +913,8 @@ public class Window extends JFrame{
 					if(Character.toString(main.charAt(1)).equals(" ")){
 						
 						if(Character.toString(main.charAt(0)).equals(" ")){
-							fieldString = "001";
-							i = 1;
+							fieldString = "030";
+							i = 30;
 						}
 						else{
 						i = Integer.parseInt(main.substring(0,1));

@@ -1,8 +1,14 @@
 textes d'aide;
 
-0;Jmusic est un générateur procédural de musique.* Il permet à l'utilisateur,avec ou sans connaissances, de paramétrer de multiple façon la musique.* Les options sont plus ou moins complexes et le résultat dépend uniquement de celles-ci.* Cliquez sur suivant pour plus de détails.;
-1;Casual Options:* Les options dîtes casual sont à destination des utilisateur novices ou qui n'ont jamais* pratiqué de musique. Les options présentes modifies plusieurs paramètres interne à la volée.* Par exemple, si l'utilisateur choisit l'option musique "sad" alors, le mode, la note fondamentale, le tempo,* l'unité de temps et d'autres options, vont être automatiquement changées.* Les options casual sont donc à bannir pour une utilisation avancée.;
-2;j'aime la choucroute;
-3;lolilol;
-4;yayyyya;
-5;fin;
+pour edit le contenu:
+- le integer en debut de ligne est le numéro de page
+- le ; est le caratère séparateur
+- utilisés * environ tous les 10 mots pour un retour à ligne. au dela le JScrollPanel prendra de tte facon le relais, mais ce serait plus visible
+	de le faire comme indiqué précédamment.
+
+0;Jmusic Generator:** Jmusic est un générateur procédural de musique.* Il permet à l'utilisateur,avec ou sans connaissances, de paramétrer de multiple façon la musique.* Les options sont plus ou moins complexes et le résultat dépend uniquement de celles-ci.* Cliquez sur suivant pour plus de détails.**;
+1;Casual Options:** Les options dîtes casual sont à destination des utilisateur novices ou qui n'ont jamais* pratiqué de musique. Les options présentes modifies plusieurs paramètres interne à la volée.* Par exemple, si l'utilisateur choisit l'option musique "sad" alors, le mode, la note fondamentale,* le tempo, l'unité de temps et d'autres options, vont être automatiquement changées.* Les options casual sont donc à bannir pour une utilisation avancée.**;
+2;Advenced options:** Afin d'affiner le résultat final il est recommandé d'utiliser les options avancées.* La note fondamentale, le mode, et le motif d'accord sont très* important si vous souhaitez obtenir des résultats agréable. Afin de ne* pas vous perdre dans les options et obtenir un ensemble* homogène, il est recommandé d'avoir des notions de solfèges. L'option genre* modifie beaucoup d'autre options à chanque fois qu'il est set.* si vous voulez composer librement un ensemble de paramètres personnalisés* mettez cette option sur la valeur "aucun".;
+3;General Options:** Time unit permet de choisir l'unité de temps du morceau, par exemple* si vous choisissez "noire", le morceau se jouera au tempos à la noire.* Le tempo détermine la vitesse du morceau et melody size le nombre* de notes qui seront générées pour la main droite.* Chord length est l'option qui détermine le nombre d'accord* qui seront générés dans la loop. Les accords d'une loop* ne changent plus après la génération de la musique.**ATTENTION!** Pour valider le tempo vous devez cliquer sur le bouton* validation situé à droite du champ de texte.**;
+4;Instruments:** Choisissez les instruments joués séparément par* la main gauche (accompagnement) et la main droite (mélodie);
+5;Play / Pause:* Le bouton play pause situé en bas, juste au dessus* du lecteur vinyle, doit être utilisé lorsque vos paramètres vous* satisfaissent et que vous souhaiter lancer la* génération procédurale selon ces derniers. Le programme utilisera* alors vos paramètres créer un musique cohérente. Si vous appuyez à nouveau* sur le bouton la musique s'arrête et vous devrez relancer la génération.** ATTENTION!** Si vous avez arreté la musique vous n'obtiendrez pas exactement le* même résultat en relancant la génération. Pour conserver la dernière musique* ou la musique actuelle utlisés le boutons "save" en haut à gauche de la fenêtre.**;
