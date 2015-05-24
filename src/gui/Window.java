@@ -1,16 +1,20 @@
 package gui;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Font;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -25,6 +29,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -944,6 +949,7 @@ public class Window extends JFrame{
 				
 		class PlayPauseListener implements ActionListener {
 			public void actionPerformed(ActionEvent arg0){
+
 				switch(playState){
 				case 0:
 				playMusic = new PlayMusic(optionsAll);
@@ -956,6 +962,7 @@ public class Window extends JFrame{
 				default :
 				playState = 0;
 				}
+
 			}
 		}
 		
