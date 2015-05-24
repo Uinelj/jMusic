@@ -2,7 +2,14 @@ package chords;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-/*Not really a loop...*/
+
+/**
+ * Permet la manipulation de la liste chaînée contenant les accords. 
+ * Le nom n'est pas en accord avec la structure, mais l'objet est traité comme tel une boucle dans le player. 
+ * 
+ * @author Julien ABADJI
+ *
+ */
 public class ChordLoop {
 	private LinkedList<Chord> buffer;
 	

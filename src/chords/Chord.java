@@ -5,7 +5,12 @@ import java.util.LinkedList;
 import notes.HarmonicNote;
 import notes.RythmicNote;
 
-
+/**
+ * Chord management. 
+ * We can set, modify notes composing a chord. 
+ * @author ABADJI Julien
+ *
+ */
 public class Chord {
 	private ArrayList<HarmonicNote> notes;
 
@@ -47,6 +52,12 @@ public class Chord {
 	public LinkedList<RythmicNote> arpeggiate(){
 		return arpeggiate(2);
 	}
+	/**
+	 * Transforms a chord on a arpeggiated one. 
+	 * 
+	 * @param defaultNoteDuration
+	 * @return LinkedList of RythmicNotes to play. 
+	 */
 	public LinkedList<RythmicNote> arpeggiate(int defaultNoteDuration){
 		LinkedList<RythmicNote> arp = new LinkedList<RythmicNote>();
 		for(int i=0; i<notes.size(); i++){

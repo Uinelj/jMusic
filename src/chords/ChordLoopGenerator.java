@@ -8,6 +8,13 @@ import notes.HarmonicNote;
 import scales.Scale;
 
 //Meant to generate a cool chord suite. First implementation : the 2-5-1 cadenza.
+/**
+ * 
+ * Permet de générer une suite d'accords de façon procédurale et flexible. 
+ * 
+ * @author Julien ABADJI
+ *
+ */
 public class ChordLoopGenerator {
 	private ChordCollection chordCollection;
 	private ArrayList<List<Integer>> chordFriends;
@@ -42,7 +49,7 @@ public class ChordLoopGenerator {
 	public ArrayList<List<Integer>> getAllChordFriends(){
 		return chordFriends;
 	}
-	public List<Integer> getChordFriends(Integer degree){ //On lui file le degré I, il renvoie une List avec dedans 5 et 6.
+	public List<Integer> getChordFriends(Integer degree){ //On lui donne le degré I, il renvoie une List avec dedans 5 et 6.
 		return chordFriends.get(degree-1);
 	}
 	/*
@@ -78,25 +85,29 @@ public class ChordLoopGenerator {
 		ArrayList<Integer> randDegrees = new ArrayList<Integer>();
 		randDegrees.add(startingDegree); //We begin at the first degree.
 		for(int i=1; i<length; i++){
-			//System.out.println("Accord "+ (i+1) +" sur "+ (length));
-			magic=(int)(Math.random()*(getChordFriends(1).size()+1));
-			//magic = 0;
-			//System.out.println("Magic Number : " + magic);
+			
+			magic=(int)(Math.random()*(getChordFriends(1).size()+1)); //We generate a pseudorandom number
+			
 			if(magic < getChordFriends(randDegrees.get(i-1)).size()){
 				System.out.println("H");
-				randDegrees.add(i, getChordFriends(randDegrees.get(i-1)).get(magic));
-				//System.out.println("Degré harmoniquement valide ajouté : " + randDegrees.get(i));
+				randDegrees.add(i, getChordFriends(randDegrees.get(i-1)).get(magic)); //We get chord friend
+				
 			}else{
-				//System.out.println("Magic plus grand, on passe en random.");
+				
 				System.out.println("R");
-				randDegrees.add((int)(Math.random()*chordCollection.getScale().getNotes().size())+1);
+				randDegrees.add((int)(Math.random()*chordCollection.getScale().getNotes().size())+1); //we get a random chord
 			}
-			//System.out.println("Seed : " + randDegrees);
 		}
 		System.out.println(randDegrees);
 		makeCadenza(randDegrees);
 		return chordSuite;
 	}
+	
+	/**
+	 * @param foreignScale - Gamme étrangère
+	 * @param numberOfChords - On peut demander un nombre d'accords de passage
+	 * @return Une suite d'accords permettant de passer d'une gamme à une autre.
+	 */
 	public ArrayList<Chord> getModulationChords(Scale foreignScale, int numberOfChords){
 		ArrayList<Chord> baseChords = chordCollection.getHarmonizedChords();
 		ChordCollection foreignChordCollection = new ChordCollection(foreignScale);
@@ -105,19 +116,26 @@ public class ChordLoopGenerator {
 		ArrayList<Chord> cleanBaseChords = new ArrayList<Chord>();
 		ArrayList<Chord> cleanForeignChords = new ArrayList<Chord>();
 		ArrayList<Chord> chordSuite = new ArrayList<Chord>();
+		/*
+		 * On harmonise d'abord les deux gammes.
+		 * */
 		for(Chord chord : baseChords){
 			cleanBaseChords.add(chord.getHarmonicChord());
 		}
 		for(Chord chord : foreignChords){
 			cleanForeignChords.add(chord.getHarmonicChord());
 		}
-		//System.out.println(cleanBaseChords);
-		//System.out.println(cleanForeignChords);
+		/*
+		 * On recherche les accords en commun entre les deux gammes
+		 * */
 		for(int i=0; i<cleanForeignChords.size(); i++){
 			if(cleanForeignChords.contains(cleanBaseChords.get(i))){
 				commonDegrees.add(i);
 			}
 		}
+		/*
+		 * On génère une suite d'accords sur ces correspondances.
+		 * */
 		for(int i=0; i<numberOfChords; i++){
 			chordSuite.add(baseChords.get(((int)(Math.random()*commonDegrees.size()))));
 		}

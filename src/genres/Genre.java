@@ -18,6 +18,12 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+/**
+ * @author Julien ABADJI
+ *
+ *	Genre permet d'extraire les données de genre des fichiers XML, de les convertir au bon format, et enfin de remplir au choix la forme ou la progression d'accords en fonction de la s
+ *  structure du morceau
+ */
 public class Genre {
 		
 		String prettyName;
@@ -33,11 +39,17 @@ public class Genre {
 		int melodyMode;
 		int chordsMode;
 		
-	public Genre(String name) throws XPathExpressionException{ //Complexity : O(scary)
+	/**
+	 * @param name - nom exact du fichier de genre, en omettant ".xml"
+	 * @throws XPathExpressionException - Si le fichier xml n'est pas valide.
+	 */
+	public Genre(String name) throws XPathExpressionException{
 		XPathFactory xpf = XPathFactory.newInstance();
         XPath xPath = xpf.newXPath();
-        InputSource is = new InputSource("trunk/data/genres/" + name + ".xml");
-        
+        InputSource is = new InputSource("trunk/data/genres/" + name + ".xml"); //Nécessaire au parsage par xPath
+        /*
+         * On crée les requêtes propres à chaque caractéristique du genre
+         * */
       //Name
         XPathExpression nameExpression = xPath.compile("genre//name");
       //minTempo
@@ -62,7 +74,9 @@ public class Genre {
         XPathExpression melodyModeExpression = xPath.compile("genre//modes//melody//mode");
         XPathExpression chordsModeExpression = xPath.compile("genre//modes//chords//mode");
         
-        
+        /*
+         * On les exécute en opérant des conversions pour avoir les bons formats. 
+         * */
         prettyName = (String) nameExpression.evaluate(is, XPathConstants.STRING);
         
         Double minTempoDouble = (Double) minTempoExpression.evaluate(is, XPathConstants.NUMBER);
@@ -77,7 +91,7 @@ public class Genre {
 	        for (int i=0; i < splittedFS.length; i++){
 	        	form.add(splittedFS[i].charAt(0));
 	        }
-        }else{
+        }else{ //Si la forme n'est pas précisée, on n'aura qu'une seule entité.
         	form.add('A');
         }
         
@@ -86,7 +100,7 @@ public class Genre {
         System.out.println(formLength);
         if(formLength == 0){
         	formLength = 4;
-        }
+        } //Si la longueur des entités n'est pas précisée, nous aurons quatre unités de temps par entité.
         String progressionString = (String) progressionExpression.evaluate(is, XPathConstants.STRING);
         if(!(progressionString == "")){
         	form = null;
@@ -197,6 +211,21 @@ public class Genre {
 	}
 
 
+		/**
+		 * 
+		 * Permet de créer un genre sans passer par les XML. Utile pour modifier des données extraites.
+		 * @param prettyName
+		 * @param minTempo
+		 * @param maxTempo
+		 * @param melodyInstruments
+		 * @param chordInstruments
+		 * @param form
+		 * @param chordStructure
+		 * @param progression
+		 * @param chordStyle
+		 * @param melodyMode
+		 * @param chordsMode
+		 */
 		public Genre(String prettyName, Integer minTempo, Integer maxTempo,
 			ArrayList<Integer> melodyInstruments,
 			ArrayList<Integer> chordInstruments, ArrayList<Character> form,
@@ -217,6 +246,11 @@ public class Genre {
 	}
 
 
+		/**
+		 * @param path - Chemin vers les xml
+		 * @return - Une liste des genres disponibles
+		 * @throws IOException - Si le chemin n'existe pas/ n'est pas accessible
+		 */
 		public static List<String> listGenres(String path) throws IOException{
 			List<String> genres = new ArrayList<String>();
 			File[] files = new File(path).listFiles();
