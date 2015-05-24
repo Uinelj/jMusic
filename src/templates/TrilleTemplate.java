@@ -7,10 +7,16 @@ import notes.HarmonicNote;
 import notes.Note;
 import notes.RythmicNote;
 
+/**
+ * @author JOHAN
+ * TrilleTemplate est un template qui créé une suite de rythmicnotes en code dur.
+ */
+ 
 public class TrilleTemplate extends Template{
-	/*
-	 * Makes a Trill
-	 * */
+	
+	/**
+	 * @param templateNotes un template attribue un rythme (length) a des notes données en paramètre  donc il préfère recevoir des arraylist de harmonicnotes
+	 */
 	public TrilleTemplate(ArrayList<HarmonicNote> templateNotes) {
 			
 		ArrayList<RythmicNote> trille = new ArrayList<RythmicNote>();

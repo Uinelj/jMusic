@@ -4,6 +4,10 @@ package modes;
 
 import java.util.ArrayList;
 
+/**
+ * @author JOHAN
+ * La diatonicCollection permet d'intancier tous les intervalls de mode d'un seul coup
+ */
 public class DiatonicCollection{ //Diatonic collection instancie 7 modes d'un seul tenant dans une arrayList de modes.
 	
 	private ArrayList<Mode> diatonicCollection = new ArrayList<Mode>();
@@ -11,11 +15,14 @@ public class DiatonicCollection{ //Diatonic collection instancie 7 modes d'un se
 	private int b = 6;
 	
 	/* 
-	 * C'est en gros pour que vous COMPRENIEZ les chéris, ici on instancie 7 MODES diatonics et pour les recup c'est moche
+	 *  ici on instancie 7 MODES diatonics et pour les recup c'est moche
 	 * pour récup UN MODE specific faites un tour dans SpecificMode qui fait essentiellement la meme chose mais renvoit UN SEUL MODE
 	 * DE VOTRE CHOIX ;)
 	 */
 	
+	/**
+	 * 
+	 */
 	public DiatonicCollection(){ //la arrayList<mode> de la collection est remplis de mode ainsi: do,ré,mi,fa,sol,la,si. (dans cet ordre).
 		ArrayList<Integer> intervals = new ArrayList<Integer>(); 
 		
@@ -40,6 +47,9 @@ public class DiatonicCollection{ //Diatonic collection instancie 7 modes d'un se
 		}	
 	}
 	
+	/**
+	 * @return retourne l'objet diatonicCollection sous forme de Arraylist de mode
+	 */
 	public ArrayList<Mode> getDiatonicModes(){
 		return diatonicCollection;
 	}

@@ -10,8 +10,15 @@ import notes.Note;
 import notes.RythmicNote;
 
 
+/**
+ * @author JOHAN
+ * TriolletTemplate est un template qui créé une suite de rythmicnotes en code dur.
+ */
 public class TrioletTemplate extends Template{
 	
+	/**
+	 * @param templateNotes un template attribue un rythme (length) a des notes données en paramètre donc il préfère recevoir des arraylist de harmonicnotes
+	 */
 	public TrioletTemplate(ArrayList<HarmonicNote> templateNotes) {
 			
 			ArrayList<RythmicNote> triolet = new ArrayList<RythmicNote>();

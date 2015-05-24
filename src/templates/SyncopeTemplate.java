@@ -8,8 +8,15 @@ import java.util.Iterator;
 import notes.HarmonicNote;
 import notes.RythmicNote;
 
+/**
+ * @author JOHAN
+ * SyncopeTemplate est un template qui créé une suite de rythmicnotes en code dur.
+ */
 public class SyncopeTemplate extends Template{
 	
+	/**
+	 * @param templateNotes un template attribue un rythme (length) a des notes données en paramètre  donc il préfère recevoir des arraylist de harmonicnotes
+	 */
 	public SyncopeTemplate(ArrayList<HarmonicNote> templateNotes){
 		
 			ArrayList<RythmicNote> syncope = new ArrayList<RythmicNote>();

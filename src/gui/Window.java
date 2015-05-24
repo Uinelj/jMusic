@@ -36,10 +36,16 @@ import javax.swing.JTextArea;
 import save.Save;
 
 
+
+/**
+ * Instancie une fenêtre pour pettre à l'utilisateur de choisir les options qu'il souhaite, de lancer la musique ou save/load le résultat
+ * @author JOHAN
+ *
+ */
 public class Window extends JFrame{
 		
-		private JButton playPause = new CustomButton("trunk/images/playpauseicon.jpg","./images/playpauseiconclicked.jpg");
-		private JLabel playPauseLabel = new JLabel("Play/Pause"); //TODO quand l'utilisateur cliquera sur play le label deviendra PAUSE et inversement
+		private JButton playPause = new CustomButton("images/playpauseicon.jpg","images/playpauseiconclicked.jpg");
+		private JLabel playPauseLabel = new JLabel("Play/Pause");
 		private int playState = 0;
 		private PlayMusic playMusic = null;
 		private JOptionPane messages = new JOptionPane();
@@ -189,12 +195,15 @@ public class Window extends JFrame{
 		
 		
 		
+		/**
+		 * objet fenetre ne prend pas de paramètre. il est créé dans le mainGUI
+		 */
 		public Window() {
 			
 			JFrame B = new JFrame("Background");
 			
 			try {
-				background = ImageIO.read(new File("trunk/images"+File.separator+"background.jpg"));
+				background = ImageIO.read(new File("images"+File.separator+"background.jpg"));
 
 				// Set your Image Here.
 				B.setContentPane(new JLabel(new ImageIcon(background)));
@@ -663,6 +672,11 @@ public class Window extends JFrame{
 		
 		// CLASSES DE LECTURE ET ACTIONS //
 		
+		/**
+		 * gère les actions sur les options casual pro et générales. Utilise des data.txt qui continennent les infos nécessaire.
+		 * @author JOHAN
+		 *
+		 */
 		class ItemAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -694,6 +708,11 @@ public class Window extends JFrame{
 			}
 		}
 		
+		/**
+		 * leftHandCategoryAction modifie les sous options de le main gauche.
+		 * @author JOHAN
+		 *
+		 */
 		class LeftHandCategoryAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 
@@ -756,6 +775,11 @@ public class Window extends JFrame{
 				}
 			}
 		}
+				/**
+				 * modifie les sous options des instruments de la main droite.
+				 * @author JOHAN
+				 *
+				 */
 				class RightHandCategoryAction implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						String source = ((JComboBox<String>) e.getSource()).getSelectedItem().toString(); 
@@ -819,6 +843,11 @@ public class Window extends JFrame{
 				}
 			}
 
+		/**
+		 * LeftHandAction gère les modifications d'instruments dans les sous catégories d'instruments. Il parse un data.txt qui contient les infos nécessaires.
+		 * @author JOHAN
+		 *
+		 */
 		class leftHandAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -849,6 +878,11 @@ public class Window extends JFrame{
 			}
 		}
 		
+		/**
+		 * de meme que leftHand action mais pour la main droite
+		 * @author JOHAN
+		 *
+		 */
 		class rightHandAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 		
@@ -878,6 +912,11 @@ public class Window extends JFrame{
 		}
 		
 		
+		/**
+		 * tempoaction gère l'événement "clique" sur valider le tempo. Il modifie la case du tableau d'options coresspondante.
+		 * @author JOHAN
+		 *
+		 */
 		class tempoAction implements ActionListener {
 			public void actionPerformed(ActionEvent e){
 				int i = 0;
@@ -947,6 +986,13 @@ public class Window extends JFrame{
 		}
 		
 				
+		/**
+		 * PlayPauseListener gère les évnements du boutton playpause, il lance la musique en créant un nouvel objet playmusic
+		 * et en envoyant en paramètres les optiosn de l'utilisateur.
+		 * Cliqué une nouvelle fois le listener détruit playmusic en appelant sa méthode stopMuic()
+		 * @author JOHAN
+		 *
+		 */
 		class PlayPauseListener implements ActionListener {
 			public void actionPerformed(ActionEvent arg0){
 
@@ -966,6 +1012,9 @@ public class Window extends JFrame{
 			}
 		}
 		
+		/**
+		 * @return le nombre max de page de la fenetre help
+		 */
 		public int pageMax(){
 			
 			int pageMax = 0;

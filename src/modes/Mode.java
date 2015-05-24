@@ -21,16 +21,29 @@ import java.util.ArrayList;
  *  12 --> gamme mineur harmonique
  */
 
+/**
+ * classe pour instancier un mode spécifique
+ * @author JOHAN
+ *
+ */
 public class Mode { //ici est dï¿½finit un objet mode, qui est essentiellement une arrayList d'intervals (int)
 					//qui associï¿½e ï¿½ une fondamentale renvoit une arrayList de notes, et au final une belle scale toute propre.
 			
 	private ArrayList<Integer> intervals;
 	private int type;
+	/**
+	 * si on possède déjà une liste d'intervalles on peu créer un objet mode selon celle-ci en lui envoyant en paramètre la arraylist de integer.
+	 * @param intervals arraylist de integer qui contient les intervalles souhaités pour le mode perssonalisé
+	 *  
+	 */
 	public Mode(ArrayList<Integer> intervals){
 		this.intervals = intervals;
 	}
 	
 
+	/**
+	 * @param type ce integer permet de déterminer lequel des 12 modes sera créé
+	 */
 	public Mode(int type){ //constructeut de mode selon ce que l'on souhaite.
 		
 		ArrayList<Integer> newIntervals =  new ArrayList<Integer>();
@@ -107,13 +120,22 @@ public class Mode { //ici est dï¿½finit un objet mode, qui est essentiellement u
 		}
 	}
 
+	/**
+	 * @return on retourne uniquement les intervalles du mode. Utilisé pour instancié la scale.
+	 */
 	public ArrayList<Integer> getIntervals(){ //en quelquesort semblable ï¿½ un getmode, mais on ne rï¿½ucp pas l'objet, juste la partie intï¿½ressante.
 		return intervals;
 	}
 	
+	/**
+	 * @param intervals arraylist d'integer pour set les intervalles du mode
+	 */
 	public void setMode(ArrayList<Integer> intervals){
 		this.intervals = intervals;
 	}
+	/**
+	 * @return permet de connaitre le type du mode si celui ci a été généré selon un typ (integer)
+	 */
 	public int getType(){
 		return type;
 	}

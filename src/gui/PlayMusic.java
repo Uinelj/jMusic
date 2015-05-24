@@ -2,6 +2,9 @@ package gui;
 
 
 
+import java.util.LinkedList;
+
+
 import melody.noteGeneration.MelodyGenerator;
 import melody.rythmicMelody.RythmicMelodyGenerator;
 import melody.rythmicMelody.RythmicMelody;
@@ -52,10 +55,7 @@ public class PlayMusic {
 		
 		tnp.play(rmg.GetRythmicMelody().getRythmicMelody());
 		
-		//melo.generateMelody(30);
-		//rmg.setMelody(melo.getMelody());
-		
-		//tnp.play(rmg.GetRythmicMelody());
+	
 		tcp.play(cl.getBuffer());
 	}
 	
