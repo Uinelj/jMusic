@@ -80,6 +80,19 @@ public class RythmicMelodyGenerator {
 		}
 	}
 		
+	public void generateNoire(int time)
+	{
+		RythmicNote rythmicNote=new RythmicNote(0, 0);//RythmicNote
+		float inc=0;
+		while(inc<time)
+		{
+			rythmicNote=new RythmicNote(melody.getMelody().getFirst().getHeight(), 4);//on cr�er une nouvelle RythmicNote
+			rythmicMelody.addRythmicNote(rythmicNote);//on la rajoute dans la m�lodie
+			melody.getMelody().removeFirst();
+			inc = inc + ts.noteTime(4);	
+			System.out.println(inc);
+		}
+	}
 	
 	public void setMelody(Melody newMelody)//change la valeur des notes des RythmicNotes de la fifo
 	{
