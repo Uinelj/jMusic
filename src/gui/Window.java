@@ -38,7 +38,7 @@ import save.Save;
 
 public class Window extends JFrame{
 		
-		private JButton playPause = new CustomButton("./images/playpauseicon.jpg","./images/playpauseiconclicked.jpg");
+		private JButton playPause = new CustomButton("trunk/images/playpauseicon.jpg","./images/playpauseiconclicked.jpg");
 		private JLabel playPauseLabel = new JLabel("Play/Pause"); //TODO quand l'utilisateur cliquera sur play le label deviendra PAUSE et inversement
 		private int playState = 0;
 		private PlayMusic playMusic = null;
@@ -194,7 +194,7 @@ public class Window extends JFrame{
 			JFrame B = new JFrame("Background");
 			
 			try {
-				background = ImageIO.read(new File("images"+File.separator+"background.jpg"));
+				background = ImageIO.read(new File("trunk/images"+File.separator+"background.jpg"));
 
 				// Set your Image Here.
 				B.setContentPane(new JLabel(new ImageIcon(background)));
@@ -258,7 +258,7 @@ public class Window extends JFrame{
 		        help.setToolTipText("get some help about options");
 		        help.addActionListener(new ActionListener(){
 		            
-		            public void actionPerformed(ActionEvent event) { //fenetre de dialogue qui affiches des astuces et des aides en récuprant les string dans le txt data helpTexts.
+		            public void actionPerformed(ActionEvent event) { //fenetre de dialogue qui affiches des astuces et des aides en rï¿½cuprant les string dans le txt data helpTexts.
 		            	
 		            	String options1[] = {"Quit","Next"};
 		            	String options2[] = {"Quit","Previous","Next"};

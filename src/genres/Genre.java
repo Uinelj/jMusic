@@ -1,6 +1,13 @@
 package genres;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -18,7 +25,7 @@ public class Genre {
 		Integer maxTempo;
 		ArrayList<Integer> melodyInstruments = new ArrayList<Integer>();
 		ArrayList<Integer> chordInstruments = new ArrayList<Integer>();
-		String form;
+		ArrayList<Character> form;
 		ArrayList<Integer> chordStructure = new ArrayList<Integer>();
 		ArrayList<Integer> progression = new ArrayList<Integer>();
 		String chordStyle;
@@ -61,7 +68,15 @@ public class Genre {
         Double maxTempoDouble = (Double) maxTempoExpression.evaluate(is, XPathConstants.NUMBER);
         maxTempo = maxTempoDouble.intValue();
         
-        form = (String) formExpression.evaluate(is, XPathConstants.STRING);
+        String formString = (String) formExpression.evaluate(is, XPathConstants.STRING);
+        if(formString != ""){
+	        String[] splittedFS = formString.split("");
+	        for (int i=0; i < splittedFS.length; i++){
+	        	form.add(splittedFS[i].charAt(0));
+	        }
+        }else{
+        	form.add('A');
+        }
         
         String progressionString = (String) progressionExpression.evaluate(is, XPathConstants.STRING);
         String[] splittedPS = progressionString.split("");
@@ -93,6 +108,41 @@ public class Genre {
         chordsMode = Integer.parseInt(chordsModeString);
 	}
         
+	
+		public Genre(String prettyName, Integer minTempo, Integer maxTempo,
+			ArrayList<Integer> melodyInstruments,
+			ArrayList<Integer> chordInstruments, ArrayList<Character> form,
+			ArrayList<Integer> chordStructure, ArrayList<Integer> progression,
+			String chordStyle, int melodyMode, int chordsMode) {
+		super();
+		this.prettyName = prettyName;
+		this.minTempo = minTempo;
+		this.maxTempo = maxTempo;
+		this.melodyInstruments = melodyInstruments;
+		this.chordInstruments = chordInstruments;
+		this.form = form;
+		this.chordStructure = chordStructure;
+		this.progression = progression;
+		this.chordStyle = chordStyle;
+		this.melodyMode = melodyMode;
+		this.chordsMode = chordsMode;
+	}
+
+
+		public static List<String> listGenres(String path) throws IOException{
+			List<String> genres = new ArrayList<String>();
+			File[] files = new File(path).listFiles();
+			for(File file : files){
+				if(file.isFile()){
+					int i = file.getName().lastIndexOf('.');
+					if ((i>0) && file.getName().substring(i+1).equals("xml")) {
+						genres.add(file.getName().substring(0, i));
+					}
+				}
+			}
+			return genres;
+			
+		}
 	public String getName(){
 		return prettyName;
 	}
@@ -113,7 +163,7 @@ public class Genre {
 		return chordInstruments;
 	}
 	
-	public String getForm(){
+	public ArrayList<Character> getForm(){
 		return form;
 	}
 	

@@ -13,6 +13,7 @@ import rythm.TimeSignature;
 import scales.Scale;
 import chords.Chord;
 import chords.ChordCollection;
+import chords.ChordLoopGenerator;
 
 public class mainTest {
 	public static void main(String[] args) {
@@ -32,7 +33,7 @@ public class mainTest {
 		degreesj.add(5);
 		degreesj.add(6);
 		ChordCollection cc = new ChordCollection(doMaj, degreesj);
-		
+		ChordLoopGenerator clg = new ChordLoopGenerator(doMaj);
 		
 		LinkedList<RythmicNote> buf = new LinkedList<RythmicNote>();
 		LinkedList<Chord> bufl = new LinkedList<Chord>();
