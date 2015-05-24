@@ -11,9 +11,15 @@ import javax.sound.midi.Synthesizer;
 import chords.Chord;
 import notes.RythmicNote;
 import rythm.Rythm;
-//TODO: Voir si c'est a la classe de tryCatch ou juste de throw.
+
+/**
+ * @author Julien ABADJI
+ *
+ *	Gère l'interfaçage MIDI. 
+ *	Permet de jouer une note ou un accord.
+ */
 public class Player{
-	//ArrayList<T> buffer;
+	
 	private int channel; //Channel to play. Different for chords and melody. 
 	private int instrument; //Instrument played by the player. See internet for the available instruments. 
 	private Synthesizer synth; //these two attrubutes manage the midi interactions. 
@@ -32,10 +38,9 @@ public class Player{
         midiChannel.programChange(instrument);
         this.rythm = rythm;
         try {
-			play(new RythmicNote(60, 2));
+			play(new RythmicNote(60, 2)); //Jingle
 			play(new RythmicNote(67, 4));
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

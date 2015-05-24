@@ -4,6 +4,10 @@ import java.util.LinkedList;
 
 import chords.Chord;
 
+/**
+ * @author Julien ABADJI
+ *	Permet de contrôler le ChordPlayer
+ */
 public class ThreadedChordPlayer{
 	ChordPlayer player;
 	Thread thread;

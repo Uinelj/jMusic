@@ -6,7 +6,10 @@ import javax.sound.midi.MidiChannel;
 
 import notes.RythmicNote;
 import rythm.Rythm;
-
+/**
+ * @author Julien ABADJI
+ *	Permet de contrôler le Thread NotePlayer.
+ */
 public class ThreadedNotePlayer{
 	NotePlayer player;
 	Thread thread;
