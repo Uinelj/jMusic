@@ -45,7 +45,7 @@ public class Chord {
 		return ret;
 	}
 	public LinkedList<RythmicNote> arpeggiate(){
-		return arpeggiate(4);
+		return arpeggiate(2);
 	}
 	public LinkedList<RythmicNote> arpeggiate(int defaultNoteDuration){
 		LinkedList<RythmicNote> arp = new LinkedList<RythmicNote>();

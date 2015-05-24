@@ -38,10 +38,11 @@
 		</chords>
 	</instruments>
 	<architecture>
-		<form></form>
-		<progression>1111441155441155</progression>
+		<form>AABB</form>
+		<form_length></form_length>
+		<progression></progression>
 		<chord_structure>135</chord_structure>
-		<chord_style>Sim</chord_style>
+		<chord_style>arp</chord_style>
 	</architecture>
 	<modes>
 		<melody>

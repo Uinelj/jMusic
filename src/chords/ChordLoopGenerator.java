@@ -17,7 +17,11 @@ public class ChordLoopGenerator {
 		chordCollection = new ChordCollection(scale);
 		chordSuite = new ArrayList<Chord>();
 	}
-	
+	public ChordLoopGenerator(Scale scale, ArrayList<Integer> chordStructure){
+		fillChordFriends();
+		chordCollection = new ChordCollection(scale, chordStructure);
+		chordSuite = new ArrayList<Chord>();
+	}
 	/*
 	 * A friendly degree is a degree which sounds good after the initial one. 
 	 * For example, the 5th degree sounds good after the 1st one.

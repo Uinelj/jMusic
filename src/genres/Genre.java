@@ -25,7 +25,8 @@ public class Genre {
 		Integer maxTempo;
 		ArrayList<Integer> melodyInstruments = new ArrayList<Integer>();
 		ArrayList<Integer> chordInstruments = new ArrayList<Integer>();
-		ArrayList<Character> form;
+		ArrayList<Character> form = new ArrayList<Character>();
+		int formLength;
 		ArrayList<Integer> chordStructure = new ArrayList<Integer>();
 		ArrayList<Integer> progression = new ArrayList<Integer>();
 		String chordStyle;
@@ -45,6 +46,8 @@ public class Genre {
         XPathExpression maxTempoExpression = xPath.compile("genre//tempo//max");
       //form
         XPathExpression formExpression = xPath.compile("genre//architecture//form");
+      //formLength
+        XPathExpression formLengthExpression = xPath.compile("genre//architecture//form_length");
       //progression
         XPathExpression progressionExpression = xPath.compile("genre//architecture//progression");
       //chordStructure
@@ -78,17 +81,31 @@ public class Genre {
         	form.add('A');
         }
         
+        Double formLengthDouble = (Double) formLengthExpression.evaluate(is, XPathConstants.NUMBER);
+        formLength = formLengthDouble.intValue();
+        System.out.println(formLength);
+        if(formLength == 0){
+        	formLength = 4;
+        }
         String progressionString = (String) progressionExpression.evaluate(is, XPathConstants.STRING);
-        String[] splittedPS = progressionString.split("");
-        for (int i = 0; i < splittedPS.length; i++) {
-			progression.add(Integer.parseInt(splittedPS[i]));
-		}
+        if(!(progressionString == "")){
+        	form = null;
+        	formLength = 0;
+	        String[] splittedPS = progressionString.split("");
+	        for (int i = 0; i < splittedPS.length; i++) {
+				progression.add(Integer.parseInt(splittedPS[i]));
+			}
+        }
         
         String chordStructureString = (String) chordStructureExpression.evaluate(is, XPathConstants.STRING);
         String[] splittedCSS = chordStructureString.split("");
-        for (int i = 0; i < splittedCSS.length; i++) {
-			chordStructure.add(Integer.parseInt(splittedCSS[i]));
-		}
+        if(splittedCSS[0] == ""){
+        	chordStructure = null;
+        }else{
+	        for (int i = 0; i < splittedCSS.length; i++) {
+				chordStructure.add(Integer.parseInt(splittedCSS[i]));
+			}
+        }
        
         chordStyle = (String) chordStyleExpression.evaluate(is, XPathConstants.STRING);
 
@@ -109,6 +126,77 @@ public class Genre {
 	}
         
 	
+		public int getFormLength() {
+		return formLength;
+	}
+
+
+		public void setPrettyName(String prettyName) {
+		this.prettyName = prettyName;
+	}
+
+
+	public void setMinTempo(Integer minTempo) {
+		this.minTempo = minTempo;
+	}
+
+
+	public void setMaxTempo(Integer maxTempo) {
+		this.maxTempo = maxTempo;
+	}
+
+
+	public void setMelodyInstruments(ArrayList<Integer> melodyInstruments) {
+		this.melodyInstruments = melodyInstruments;
+	}
+
+	public void setMelodyInstruments(Integer melodyInstrument) {
+		ArrayList<Integer> melodyInstrumentAL = new ArrayList<Integer>();
+		melodyInstrumentAL.add(melodyInstrument);
+		this.melodyInstruments = melodyInstrumentAL;
+	}
+	
+	public void setChordInstruments(ArrayList<Integer> chordInstruments) {
+		this.chordInstruments = chordInstruments;
+	}
+
+	public void setChordInstruments(Integer chordInstrument) {
+		ArrayList<Integer> chordInstrumentAL = new ArrayList<Integer>();
+		chordInstrumentAL.add(chordInstrument);
+		this.melodyInstruments = chordInstrumentAL;
+		this.chordInstruments = chordInstrumentAL;
+	}
+
+	public void setForm(ArrayList<Character> form) {
+		this.form = form;
+	}
+
+
+	public void setChordStructure(ArrayList<Integer> chordStructure) {
+		this.chordStructure = chordStructure;
+	}
+
+
+	public void setProgression(ArrayList<Integer> progression) {
+		this.progression = progression;
+	}
+
+
+	public void setChordStyle(String chordStyle) {
+		this.chordStyle = chordStyle;
+	}
+
+
+	public void setMelodyMode(int melodyMode) {
+		this.melodyMode = melodyMode;
+	}
+
+
+	public void setChordsMode(int chordsMode) {
+		this.chordsMode = chordsMode;
+	}
+
+
 		public Genre(String prettyName, Integer minTempo, Integer maxTempo,
 			ArrayList<Integer> melodyInstruments,
 			ArrayList<Integer> chordInstruments, ArrayList<Character> form,

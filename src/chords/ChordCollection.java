@@ -26,7 +26,6 @@ public class ChordCollection {
 			for(int j=0; j<chordStructure.size(); j++){
 				degBuffer = i+chordStructure.get(j)-1;
 				chordBuffer.addNote(scale.getDegree(degBuffer));
-				System.out.println(degBuffer);
 			}
 			harmonizedChords.add(chordBuffer);
 		}
