@@ -6,7 +6,7 @@ import chords.Chord;
 
 /**
  * @author Julien ABADJI
- *	Permet de contrôler le ChordPlayer
+ *	Permet de contrôler le Thread ChordPlayer.
  */
 public class ThreadedChordPlayer{
 	ChordPlayer player;
