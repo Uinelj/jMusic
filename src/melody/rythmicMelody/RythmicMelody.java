@@ -1,9 +1,10 @@
 package melody.rythmicMelody;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import templates.Template;
 import notes.*;
-public class RythmicMelody {
+public class RythmicMelody implements Serializable{
 
 	private LinkedList<RythmicNote> rythmicMelody;//la mélodie va remplir ces templates
 	
@@ -43,7 +44,7 @@ public class RythmicMelody {
 		String str=" ";
 		for(int i=0; i< rythmicMelody.size();i++)
 		{
-			str="  "+str+rythmicMelody.get(i).getHeight()+"dure : "+rythmicMelody.get(i).getLength();
+			str="  "+str+rythmicMelody.get(i).getHeight()+"dure : "+rythmicMelody.get(i).getLength()+" ";
 		}
 		return str;
 	}

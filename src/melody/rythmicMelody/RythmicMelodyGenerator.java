@@ -12,14 +12,14 @@ import melody.tools.ProbabilityTable;
 import notes.HarmonicNote;
 import notes.RythmicNote;
 
-public class RythmedMelody {
+public class RythmicMelodyGenerator {
 	
 	private RythmicMelody rythmicMelody;
 	private Scale scale;
 	private TimeSignature ts ;
 	private Melody melody;
 	private int melodySize;
-	public RythmedMelody(Melody melody, Scale scale, int melodySize, TimeSignature ts)
+	public RythmicMelodyGenerator(Melody melody, Scale scale, int melodySize, TimeSignature ts)
 	{
 		rythmicMelody = new RythmicMelody();
 		this.scale = scale;
@@ -89,9 +89,9 @@ public class RythmedMelody {
 		}
 	}
 	
-	public LinkedList<RythmicNote> GetRythmicMelody()
+	public RythmicMelody GetRythmicMelody()
 	{
-		return rythmicMelody.getRythmicMelody();
+		return rythmicMelody;
 	}
 	
 	public RythmicMelody GetRythmicMelodyObject(){
