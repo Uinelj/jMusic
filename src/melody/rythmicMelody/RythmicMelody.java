@@ -6,7 +6,7 @@ import templates.Template;
 import notes.*;
 public class RythmicMelody implements Serializable{
 
-	private LinkedList<RythmicNote> rythmicMelody;//la mélodie va remplir ces templates
+	private LinkedList<RythmicNote> rythmicMelody;//la mï¿½lodie va remplir ces templates
 	
 	public RythmicMelody()
 	{		rythmicMelody = new LinkedList<RythmicNote>();
@@ -16,7 +16,9 @@ public class RythmicMelody implements Serializable{
 	{
 		return rythmicMelody;
 	}
-	
+	public void addAll(LinkedList<RythmicNote> rythmicMelody){
+		this.rythmicMelody.addAll(rythmicMelody);
+	}
 	
 	public RythmicNote removeFirst()
 	{

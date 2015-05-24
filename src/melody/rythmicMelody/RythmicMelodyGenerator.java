@@ -30,7 +30,7 @@ public class RythmicMelodyGenerator {
 	
 	public void generateRythmicMelody()
 	{
-		float duration=0;//correspond au nombre de temps écoulé
+		float duration=0;//correspond au nombre de temps ï¿½coulï¿½
 		RythmGraph g = new RythmGraph();
 		RythmicNote rythmicNote=new RythmicNote(0, 0);//RythmicNote
 		int proba=0;
@@ -80,7 +80,7 @@ public class RythmicMelodyGenerator {
 		}
 	}
 		
-	public void generateNoire(int time)
+	public RythmicMelody generateNoire(int time)
 	{
 		RythmicNote rythmicNote=new RythmicNote(0, 0);//RythmicNote
 		float inc=0;
@@ -92,8 +92,15 @@ public class RythmicMelodyGenerator {
 			inc = inc + ts.noteTime(4);	
 			System.out.println(inc);
 		}
+		return rythmicMelody;
 	}
-	
+	public RythmicMelody simpleGen(int numberOfTimes){
+		RythmicMelody rm = new RythmicMelody();
+		for(int i=0; i<numberOfTimes; i++){
+			rm.addRythmicNote(melody.getMelody().removeFirst().toRythmicNote(4));
+		}
+		return rm;
+	}
 	public void setMelody(Melody newMelody)//change la valeur des notes des RythmicNotes de la fifo
 	{
 		for(int i=0;i<newMelody.getMelody().size();i++)

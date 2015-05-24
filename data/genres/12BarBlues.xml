@@ -38,7 +38,7 @@
 		</chords>
 	</instruments>
 	<architecture>
-		<form>AABB</form>
+		<form>AABBAACC</form>
 		<form_length></form_length>
 		<progression></progression>
 		<chord_structure>135</chord_structure>
@@ -46,7 +46,7 @@
 	</architecture>
 	<modes>
 		<melody>
-			<mode>10</mode>
+			<mode>1</mode>
 		</melody>
 		<chords>
 			<mode>1</mode>
