@@ -50,6 +50,8 @@ public class GenreProcessor {
 		int tempo = rand.nextInt(genre.getMaxTempo()-genre.getMinTempo()+1) + genre.getMinTempo();
 		Integer melodyInstrument = rand.nextInt(genre.getMelodyInstruments().size());
 		Integer chordInstrument = rand.nextInt(genre.getChordInstruments().size());
+		System.out.println(melodyInstrument);
+		System.out.println(chordInstrument);
 		baseNote = new HarmonicNote(rand.nextInt(25)+36);//
 		genre.setMinTempo(tempo);
 		genre.setMaxTempo(tempo);
@@ -130,6 +132,7 @@ public class GenreProcessor {
 	 */
 	public void play(){
 		if(isProcessed && isComposed){
+
 			Rythm r = new Rythm(new TimeSignature(4, 4, genre.getMinTempo()));
 			ThreadedNotePlayer melody = new ThreadedNotePlayer(new NotePlayer(1, genre.getMelodyInstruments().get(0), r));
 			ThreadedChordPlayer chords;
@@ -138,10 +141,10 @@ public class GenreProcessor {
 			switch(genre.getChordStyle()){ //Si les accords sont des arpèges, on utilise un NotePlayer.
 				case "arp":
 					chords = null;
-					arpChords = new ThreadedNotePlayer(new NotePlayer(2, genre.getMelodyInstruments().get(0), r));
+					arpChords = new ThreadedNotePlayer(new NotePlayer(2, genre.getChordInstruments().get(0), r));
 					break;
 				default:
-					chords = new ThreadedChordPlayer(new ChordPlayer(2, genre.getMelodyInstruments().get(0), r));
+					chords = new ThreadedChordPlayer(new ChordPlayer(2, genre.getChordInstruments().get(0), r));
 					arpChords = null;
 					break;
 			

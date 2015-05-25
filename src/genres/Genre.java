@@ -123,14 +123,14 @@ public class Genre {
        
         chordStyle = (String) chordStyleExpression.evaluate(is, XPathConstants.STRING);
 
-        NodeList instrumentsNode = (NodeList) melodyInstrumentsExpression.evaluate(is, XPathConstants.NODESET);
-        for (int i = 0; i < instrumentsNode.getLength(); i++) {
-			melodyInstruments.add(Integer.parseInt(instrumentsNode.item(i).getTextContent()));
+        NodeList melodyInstrumentsNode = (NodeList) melodyInstrumentsExpression.evaluate(is, XPathConstants.NODESET);
+        for (int i = 0; i < melodyInstrumentsNode.getLength(); i++) {
+			melodyInstruments.add(Integer.parseInt(melodyInstrumentsNode.item(i).getTextContent()));
         }
         
-        instrumentsNode = (NodeList) chordInstrumentsExpression.evaluate(is, XPathConstants.NODESET);
-        for (int i = 0; i < instrumentsNode.getLength(); i++) {
-			chordInstruments.add(Integer.parseInt(instrumentsNode.item(i).getTextContent()));
+        NodeList chordsInstrumentsNode = (NodeList) chordInstrumentsExpression.evaluate(is, XPathConstants.NODESET);
+        for (int i = 0; i < chordsInstrumentsNode.getLength(); i++) {
+			chordInstruments.add(Integer.parseInt(chordsInstrumentsNode.item(i).getTextContent()));
         }
         
         String melodyModeString = (String) melodyModeExpression.evaluate(is, XPathConstants.STRING);
@@ -165,9 +165,7 @@ public class Genre {
 	}
 
 	public void setMelodyInstruments(Integer melodyInstrument) {
-		ArrayList<Integer> melodyInstrumentAL = new ArrayList<Integer>();
-		melodyInstrumentAL.add(melodyInstrument);
-		this.melodyInstruments = melodyInstrumentAL;
+		melodyInstruments.add(0, melodyInstrument);
 	}
 	
 	public void setChordInstruments(ArrayList<Integer> chordInstruments) {
@@ -175,10 +173,7 @@ public class Genre {
 	}
 
 	public void setChordInstruments(Integer chordInstrument) {
-		ArrayList<Integer> chordInstrumentAL = new ArrayList<Integer>();
-		chordInstrumentAL.add(chordInstrument);
-		this.melodyInstruments = chordInstrumentAL;
-		this.chordInstruments = chordInstrumentAL;
+		chordInstruments.add(0, chordInstrument);
 	}
 
 	public void setForm(ArrayList<Character> form) {
