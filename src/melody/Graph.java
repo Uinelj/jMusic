@@ -1,5 +1,10 @@
 package melody;
-
+/**
+ * classe de donnée : gère des graphes
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class Graph 
 {
 

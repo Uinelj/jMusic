@@ -1,5 +1,10 @@
 package rythm;
-
+/**
+ * classe de donnÈe : converti un nombre de temps en secondes
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class Rythm 
 {
 	private TimeSignature ts;//signature de la partition
@@ -8,6 +13,10 @@ public class Rythm
 		this.ts=ts;
 	}
 	
+	/**
+	 * @param nombre de temps ‡ convertir
+	 * @return float, le temps en seconde
+	 */
 	public float convertTime(int length)//m√©thode pour convertir un nombre de temps en seconde
 	{
 		float croche=60000/ts.getTempo();//dur√©e d'une croche en seconde

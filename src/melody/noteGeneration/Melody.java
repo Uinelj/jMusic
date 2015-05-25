@@ -3,7 +3,12 @@ import java.util.LinkedList;
 
 import melody.tools.Repetition;
 import notes.HarmonicNote;
-
+/**
+ * classe de données : gère une file de harmonicNote, les notes de la mélodie
+ *
+ * @author AKTOR Alexis
+ *
+ */
 	public class Melody {
 		
 		private LinkedList<HarmonicNote> melody = new LinkedList<HarmonicNote>();//Fifo contenant les notes générée proceduralement

@@ -4,7 +4,12 @@ import scales.Scale;
 import melody.Graph;
 import melody.rythmicMelody.RythmGraph;
 import modes.Mode;
-
+/**
+ * classe de traitement : rempli les graphes de probabilités
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class NoteGraph {
 	
 	Graph g;

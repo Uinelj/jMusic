@@ -9,7 +9,12 @@ import melody.tools.ProbabilityTable;
 import notes.HarmonicNote;
 import notes.RythmicNote;
 import scales.Scale;
-
+/**
+ * classe de traitement : génère les notes de la mélodie
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class MelodyGenerator {
 
 	private Melody melody;
@@ -25,7 +30,10 @@ public class MelodyGenerator {
 	}
 	
 	
-	
+	/**
+	 * @param l'index de la première note de la mélodie
+	 * @return Melody
+	 */
 	public Melody generateMelody(Integer index) 
 	{
 		int time=0;

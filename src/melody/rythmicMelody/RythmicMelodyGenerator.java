@@ -11,7 +11,12 @@ import melody.noteGeneration.Motif;
 import melody.tools.ProbabilityTable;
 import notes.HarmonicNote;
 import notes.RythmicNote;
-
+/**
+ * classe de traitement : génère la mélodie rythmic 
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class RythmicMelodyGenerator {
 	
 	private RythmicMelody rythmicMelody;

@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import scales.*;
 import notes.HarmonicNote;
 
-
+/**
+ * classe de traitement : génère les notes jouables sur la gamme du piano
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class Piano {
 	private ArrayList<PianoNotes> piano;
 	private Scale scale;

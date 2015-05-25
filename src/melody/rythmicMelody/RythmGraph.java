@@ -2,7 +2,12 @@ package melody.rythmicMelody;
 
 import melody.tools.ProbabilityTable;
 import modes.Mode;
-
+/**
+ * classe de traitement : rempli les graphes de probabilités de la mélodie Rythmic
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class RythmGraph {
 	
 	private int table[][];

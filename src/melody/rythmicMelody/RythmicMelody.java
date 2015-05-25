@@ -1,5 +1,11 @@
 package melody.rythmicMelody;
 import java.io.Serializable;
+/**
+ * classe de donnée : gère une file de rythmicNote
+ *
+ * @author AKTOR Alexis
+ *
+ */
 import java.util.LinkedList;
 
 import templates.Template;

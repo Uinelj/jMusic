@@ -2,7 +2,12 @@ package melody.tools;
 
 import notes.HarmonicNote;
 
-
+/**
+ * classe de données : gère les notes du piano jouables sur la gamme ( chaques notes est représentée par son degré et sa note
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class PianoNotes {
 
 	private HarmonicNote note;

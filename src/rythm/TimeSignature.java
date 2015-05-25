@@ -1,7 +1,12 @@
 package rythm;
 
 import notes.RythmicNote;
-
+/**
+ * classe de données : gère le tempo
+ *
+ * @author AKTOR Alexis
+ *
+ */
 public class TimeSignature {
 	private int numberOfTime;//nombre de temps dans une mesure
 	private int measureUnit;//unitï¿½ de temps
@@ -13,6 +18,10 @@ public class TimeSignature {
 		this.setTempo(tempo);
 	}
 
+	/**
+	 * @param la note que l'on veut convertir en seconde
+	 * @return le temps en seconde que dure la note
+	 */
 	public float noteTime(int note)// on test la note pour initialiser le nombre de temps qu'elle dure avec comme unité de temps la triplecroche
 	{
 		float time=0;
